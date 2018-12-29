@@ -60,6 +60,24 @@
 - [x] Mongodb
 - [x] Mongoose
 
+## 项目运行效果
+- 首页
+![index](./record/2017-09-28%2010_25_45.gif)
+
+- 管理员登录
+
+![adminLogined](./record/adminLogined.gif)
+
+- 标签管理
+
+![amdinTag](./record/adminTag.gif)
+
+- 文章详情
+![detail](./record/checkArticleDetail.gif)
+
+- 发文
+![newArticle](./record/new_article.gif)
+
 ## 环境
 ```
 node @8.12.0
