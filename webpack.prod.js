@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
-
+const CompressionPlugin = require("compression-webpack-plugin");
 const ROOT_PATH = pathLib.resolve(__dirname);
 const ENTRY_PATH = pathLib.resolve(ROOT_PATH, 'app');
 const OUTPUT_PATH = pathLib.resolve(ROOT_PATH, 'build');
@@ -13,14 +13,14 @@ console.log(pathLib.resolve(ENTRY_PATH, 'index.js'));
 module.exports = {
     entry: {
         index: ['babel-polyfill',pathLib.resolve(ENTRY_PATH, 'index.js')],
-        vendor: ['react', 'react-dom', 'react-router-dom']
+        vendor: ['react', 'react-dom', 'react-router-dom','react-router']
     },
     output: {
         path: OUTPUT_PATH,
         publicPath: '/',
         filename: '[name]-[chunkhash].js'
     },
-    devtool: 'source-map',
+   // devtool: 'source-map',
     module: {
         rules: [
             {
@@ -104,7 +104,12 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "manifest"
-        })
+        }), 
+        new webpack.optimize.UglifyJsPlugin({//打包优化
+            compress: {
+              warnings: false
+            }
+          })
     ],
     resolve: {
         extensions: ['.js', '.json', '.sass', '.scss', '.less', 'jsx']

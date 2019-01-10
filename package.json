@@ -9,7 +9,7 @@
     "watch-client-prod": "cross-env NODE_ENV=production node ./server/index.js",
     "start-dev-api": "nodemon --watch server/api server/api/index.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
-    "start": "npm run watch-client & npm run start-dev-api",
+    "start": "npm run watch-client",
     "start-prod": "npm run build & npm run watch-client-prod & npm run start-dev-api"
   },
   "repository": {

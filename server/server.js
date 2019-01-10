@@ -44,6 +44,7 @@ app.use('/api',require('./api/apiServer'));
 
 //热更新
 if (process.env.NODE_ENV !== 'production') {
+    console.log(`开发模式热更新启动`);
     const Webpack = require('webpack');
     const WebpackDevMiddleware = require('webpack-dev-middleware');
     const WebpackHotMiddleware = require('webpack-hot-middleware');
@@ -64,6 +65,6 @@ app.listen(port, (err) => {
     if (err) {
         console.error(err)
     } else {
-        console.log(`===>open http://${config.host}:${config.port} in a browser to view the app`);
+        console.log(`api地址端口${port}`);
     }
 });
