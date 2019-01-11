@@ -88,6 +88,16 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: "Lex blog",
+            inject: true, // 自动注入
+            minify: {
+                removeComments: true,        //去注释
+                collapseWhitespace: true,    //压缩空格
+                removeAttributeQuotes: true  //去除属性引用
+                // more options:
+                // https://github.com/kangax/html-minifier#options-quick-reference
+            },
+            //必须通过上面的 CommonsChunkPlugin 的依赖关系自动添加 js，css 等
+            chunksSortMode: 'dependency',
             showErrors: true,
         }),
         new webpack.NoEmitOnErrorsPlugin(),//保证出错时页面不阻塞，且会在编译结束后报错
