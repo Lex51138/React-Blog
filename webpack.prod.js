@@ -132,7 +132,7 @@ module.exports = {
             asset: '[path].gz[query]',
             algorithm: 'gzip',
             test: new RegExp(
-                '\\.(js|css)$'    //压缩 js 与 css
+                '\\.(js|css|jpg|png)$'    //压缩 js 与 css
             ),
             threshold: 10240,
             minRatio: 0.8
@@ -141,10 +141,5 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json', '.sass', '.scss', '.less', 'jsx']
     },
-    externals: {
-        'react': 'React',
-        'react-dom':'react-dom',
-        'react-router':'react-router'
-     }
 };
 

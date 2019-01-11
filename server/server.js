@@ -10,6 +10,7 @@ import connectHistoryApiFallback from 'connect-history-api-fallback'
 const app = new Express();
 const port = config.port;
 
+
 //原本想另起一个服务处理api请求的。。端口一直被占用就算了 反正也没什么人访问 服务器无压力QAQ
 
 // const proxy = httpProxy.createProxyServer({//反向代理API请求
@@ -28,6 +29,8 @@ const port = config.port;
 //     console.log(`反向代理api服务成功! api server 地址：${targetUrl}`);
 // });
 
+//开启gzip
+app.use(compression());
 //加载静态资源
 app.use('/', connectHistoryApiFallback());
 app.use('/', Express.static(path.join(__dirname, "..", 'build')));
