@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 const ROOT_PATH = pathLib.resolve(__dirname);
@@ -95,6 +96,7 @@ module.exports = {
             disable:false,
             allChunks:true
         }),
+        new ExtractTextPlugin('[name].[contenthash].css'),
         new webpack.HashedModuleIdsPlugin(),//用 HashedModuleIdsPlugin 可以轻松地实现 chunkhash 的稳定化
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
@@ -106,13 +108,33 @@ module.exports = {
             name: "manifest"
         }), 
         new webpack.optimize.UglifyJsPlugin({//打包优化
+            comments: false,//去除注释
             compress: {
-              warnings: false
+              warnings: false//去除警告
             }
-          })
+          }),
+          new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+             }
+         }),
+         new CompressionWebpackPlugin({ //gzip 压缩
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(js|css)$'    //压缩 js 与 css
+            ),
+            threshold: 10240,
+            minRatio: 0.8
+        })
     ],
     resolve: {
         extensions: ['.js', '.json', '.sass', '.scss', '.less', 'jsx']
-    }
+    },
+    externals: {
+        'react': 'React',
+        'react-dom':'react-dom',
+        'react-router':'react-router'
+     }
 };
 
