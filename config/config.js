@@ -3,6 +3,8 @@ module.exports = {
     port:process.env.PORT ||(process.env.NODE_ENV === 'production'?80:7777),
     apiHost:process.env.APIHOST || 'localhost',
     apiPort:process.env.APIPORT || '8791',
+    dbHost:"loadlhost",
+    dbPort:"27017",
     app:{
         title:"personal blog",
         description:'Lex\'s personal blog demo',
