@@ -1,4 +1,5 @@
 import React,{Component,PropTypes} from 'react'
+import { BackTop, Col, Layout, Row } from 'antd'
 import {connect} from 'react-redux'
 import {Detail} from '../detail'
 import {Home} from '../home'
@@ -15,6 +16,7 @@ import {actions} from '../../reducers/adminManagerTags'
 import {actions as FrontActinos} from '../../reducers/frontReducer'
 import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
+import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 const {get_all_tags} = actions;
 const {get_article_list} = FrontActinos;
@@ -44,9 +46,11 @@ class Front extends Component{
                             </Switch>
                         </div>
                         <div className={`${style.loginContainer}`}>
+                        <WidthMe />
                             {this.props.userInfo.userId ?
                                 <Logined history={this.props.history} userInfo={this.props.userInfo}/> :
                                 <Login login={login} register={register}/>}
+                              
                         </div>
                     </div>
                 </div>

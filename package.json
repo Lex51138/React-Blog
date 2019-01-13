@@ -18,7 +18,7 @@
   "author": "Nealyang",
   "license": "ISC",
   "dependencies": {
-    "antd": "^2.13.1",
+    "antd": "^3.12.3",
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.0",

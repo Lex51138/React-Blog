@@ -5,8 +5,9 @@
     padding-top: 20px;
 }
 .loginContainer{
-    flex:1;
-    margin-left: 10px;
+    width:275px;
+    /* flex:1; */
+    margin-left: 4%;
 }
 .container{
     display: flex;
@@ -15,6 +16,6 @@
     background: #eee;
 }
 .content{
-    width: 610px;
-    margin-left: 10%;
+    width: 810px;
+    margin-left: 4%;
 }
