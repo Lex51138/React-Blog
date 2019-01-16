@@ -1,6 +1,6 @@
 import React,{Component,PropTypes} from 'react'
 import './style.less'
-import { Card, Tooltip } from 'antd'
+import { Card, Tooltip ,Tag} from 'antd'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 const { Meta } = Card
@@ -41,30 +41,33 @@ export default class WidthMe extends Component{
          <div className="icon-git-wrp">
             <div className="call">
                 <Tooltip title="个人简历">
-                <Link to="/resume">&#xe60e;</Link>
+                <Link to="/resume">&#xe605;</Link>
             </Tooltip>
             <Tooltip title="github">
               <a href="https://github.com/hide-on-brush" target="view_window">
-                &#xea0a;
+              &#xe64a;
               </a>
             </Tooltip>
             <Tooltip
-              title={
-                <img
-                  className="wx"
-                  src="../../static/wx.png"
-                  alt="微信"
-                  width={100}
-                  height={100}
-                />
-              }>
-              <a>&#xe7e5;</a>
-            </Tooltip>
+            title={
+              <img
+                className="wx"
+                src="http://fs.1473.cn/86c6d8a1-11af-408a-9f75-f6b46031677d.png"
+                alt="微信"
+                width={100}
+                height={100}
+              />
+            }>
+            <a>&#xe61a;</a>
+          </Tooltip>
+          <Tooltip title="372264507">
+          <a>&#xe630;</a>
+          </Tooltip>
             <Tooltip title="知乎">
               <a
                 href="https://www.zhihu.com/people/hasi-43/activities"
                 target="view_window">
-                &#xe625;
+                &#xe69a;
               </a>
             </Tooltip>
           </div>

@@ -1,5 +1,15 @@
-.Sidebar {
-  width: 100%;
+@media (max-width: 1400px) {
+  .Sidebar a {
+    margin-right: -1% !important;
+  }
+}
+@media (max-width: 1150px) {
+  .Sidebar a {
+    margin-right: 1px !important;
+  }
+  .Sidebar a:first-child {
+    margin-left: -18px !important;
+  }
 }
 .Sidebar .call {
   display: flex;
@@ -14,7 +24,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: -10%;
   border: 1px solid rgba(63, 39, 39, 0.1);
   font-family: iconfont;
   font-size: 20px;
@@ -23,6 +33,9 @@
 .Sidebar .call a:hover {
   background-color: #333;
   color: white;
+}
+.Sidebar a:first-child {
+  margin-left: -4%;
 }
 .Sidebar .abstract {
   color: #999;

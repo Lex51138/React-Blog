@@ -3,12 +3,11 @@ import { BackTop, Col, Layout, Row } from 'antd'
 import {connect} from 'react-redux'
 import {Detail} from '../detail'
 import {Home} from '../home'
-import style from './style.css'
+import style from './style.less'
 import {
     Switch,
     Route
 } from 'react-router-dom'
-import Banner from "../components/banner/Banner";
 import Menus from "../components/menu/Menus";
 import NotFound from "../../components/notFound/NotFound";
 import {bindActionCreators} from 'redux'
@@ -20,6 +19,7 @@ import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 const {get_all_tags} = actions;
 const {get_article_list} = FrontActinos;
+const { Content } = Layout
 
 class Front extends Component{
     constructor(props){
@@ -30,31 +30,53 @@ class Front extends Component{
         const {url} = this.props.match;
         const {login, register} = this.props;
         return(
-            <div>
-                <div>
-                    <Banner/>
-                    <Menus getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
-                </div>
-                <div className={style.container}>
-                    <div className={style.contentContainer}>
-                        <div className={style.content}>
-                            <Switch>
-                                <Route exact path={url} component={Home}/>
-                                <Route path={`/detail/:id`} component={Detail}/>
-                                <Route path={`/:tag`} component={Home}/>
-                                <Route component={NotFound}/>
-                            </Switch>
-                        </div>
-                        <div className={`${style.loginContainer}`}>
-                        <WidthMe />
-                            {this.props.userInfo.userId ?
-                                <Logined history={this.props.history} userInfo={this.props.userInfo}/> :
-                                <Login login={login} register={register}/>}
-                              
-                        </div>
+            <Layout>
+             <BackTop />
+              <Menus getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
+            <Layout>
+             <Content>
+                <Row >
+                <Col xs={1} sm={1} md={1} lg={1} xl={3} xxl={5} />
+                <Col className = 'body_box' xs={22} sm={22} md={22} lg={20} xl={18} xxl={14}>
+                    <Row type="flex">
+                    <Col 
+                        xs={24}
+                        sm={24}
+                        md={24}
+                        lg={17}
+                        xl={17}
+                        xxl={17}
+                    >
+                    <div className={style.content}>
+                        <Switch>
+                            <Route exact path={url} component={Home}/>
+                            <Route path={`/detail/:id`} component={Detail}/>
+                            <Route path={`/:tag`} component={Home}/>
+                            <Route component={NotFound}/>
+                        </Switch>
                     </div>
-                </div>
-            </div>
+                    </Col>
+                    <Col 
+                        xs={24}
+                        sm={24}
+                        md={24}
+                        lg={{ span: 6, offset: 1 }}
+                        xl={{ span: 6, offset: 1 }}
+                        xxl={{ span: 6, offset: 1 }}
+                    >
+                    <div className={`${style.loginContainer}`}>
+                    <WidthMe />
+                            {this.props.userInfo.userId ?
+                            <Logined history={this.props.history} userInfo={this.props.userInfo}/> :
+                            <Login login={login} register={register}/>}  
+                        </div>
+                    </Col>
+                    </Row>
+                 </Col>
+                </Row>
+            </Content>
+        </Layout>
+                </Layout>
         )
     }
 

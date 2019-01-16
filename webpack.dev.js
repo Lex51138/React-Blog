@@ -89,9 +89,10 @@ module.exports = {
         new webpack.DefinePlugin({
             "progress.env.NODE_ENV": JSON.stringify('development')
         }),
-        new HtmlWebpackPlugin({
+        new HtmlWebpackPlugin({//构建html
             title: "Lex Blog",
             showErrors: true,
+            meta:{viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
         }),
         new webpack.NoEmitOnErrorsPlugin(),//保证出错时页面不阻塞，且会在编译结束后报错
         new webpack.HashedModuleIdsPlugin(),//用 HashedModuleIdsPlugin 可以轻松地实现 chunkhash 的稳定化

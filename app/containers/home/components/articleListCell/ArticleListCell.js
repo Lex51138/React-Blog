@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 
 export const ArticleListCell = (props)=>(
     <div className={`${style.container} `} onClick={()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}}>
-        <div>
+        <div className={style.cover}>
             <img src={props.data.coverImg} alt=""/>
         </div>
         <div className={style.bottomContainer}>
@@ -34,7 +34,7 @@ export const ArticleListCell = (props)=>(
                     </span>
                 </p>
                 <span className={style.lastSpan}>
-                    阅读全文 <span>》</span>
+                    阅读全文<span> >></span>
                 </span>
             </div>
         </div>

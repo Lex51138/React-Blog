@@ -4,7 +4,7 @@ import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {AppContainer} from 'react-hot-loader'
 import configureStore from './configureStore'
-
+import './index.less'
 let div = document.createElement('div');
 div.setAttribute('id', 'app');
 document.body.appendChild(div);

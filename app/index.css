@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 1013528 */
+  src: url('//at.alicdn.com/t/font_1013528_ow0454icsrg.eot');
+  src: url('//at.alicdn.com/t/font_1013528_ow0454icsrg.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1013528_ow0454icsrg.woff2') format('woff2'), url('//at.alicdn.com/t/font_1013528_ow0454icsrg.woff') format('woff'), url('//at.alicdn.com/t/font_1013528_ow0454icsrg.ttf') format('truetype'), url('//at.alicdn.com/t/font_1013528_ow0454icsrg.svg#iconfont') format('svg');
+}
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #ececec;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.icon-font {
+  font-family: "iconfont";
+  font-size: 18px;
+}
+.small-icon-font {
+  font-family: "iconfont";
+  font-size: 15px;
+}
+.spin {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

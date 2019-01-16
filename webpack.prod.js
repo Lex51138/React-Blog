@@ -86,7 +86,7 @@ module.exports = {
         new webpack.DefinePlugin({
             "progress.env.NODE_ENV": JSON.stringify('production')
         }),
-        new HtmlWebpackPlugin({
+        new HtmlWebpackPlugin({ //构建html
             title: "Lex blog",
             inject: true, // 自动注入
             minify: {
@@ -99,6 +99,7 @@ module.exports = {
             //必须通过上面的 CommonsChunkPlugin 的依赖关系自动添加 js，css 等
             chunksSortMode: 'dependency',
             showErrors: true,
+            meta:{viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'} //加入meta自适应至手机端
         }),
         new webpack.NoEmitOnErrorsPlugin(),//保证出错时页面不阻塞，且会在编译结束后报错
         new ExtractTextPlugin({
