@@ -13,5 +13,6 @@ module.exports = new mongoose.Schema({
     coverImg:String,//封面图片
     author:String,//作者
     tags:Array,//标签
-    isPublish:Boolean//是否发布
+    isPublish:Boolean,//是否发布
+    Summary:String//摘要
 });

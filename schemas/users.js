@@ -6,7 +6,10 @@ import mongoose from 'mongoose'
 module.exports = new mongoose.Schema({
     username:String,
     password:String,
-    type:String//管理员、普通用户
+    site:String,//用户站点
+    type:String,//管理员、弟弟用户、普通用户
+    Avatar:String//用户头像
+
 });
 
 
