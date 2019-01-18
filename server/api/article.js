@@ -10,10 +10,13 @@ router.post('/addArticle', function (req, res) {
         content,
         time,
         tags,
-        isPublish
+        coverImg,
+        isPublish,
+        summary
     } = req.body;
+    let fmimg = `/${Math.round(Math.random() * 9 + 1)}.jpg`;//封面图片
     const author = req.session.userInfo.username;
-    const coverImg =  `/${Math.round(Math.random() * 9 + 1)}.jpg`;
+    coverImg==undefined?"":fmimg=coverImg;//判断是否有封面图没有的话就给他随机一张
     const viewCount = 0;
     const commentCount = 0;
     let tempArticle = new Article({
@@ -24,7 +27,8 @@ router.post('/addArticle', function (req, res) {
         commentCount,
         time,
         author,
-        coverImg,
+        coverImg:fmimg,
+        summary,
         tags:tags.split(',')
     });
     tempArticle.save().then(data=>{
@@ -42,9 +46,10 @@ router.post('/updateArticle',(req,res)=>{
         time,
         tags,
         isPublish,
-        id
+        id,
+        summary
     } = req.body;
-    Article.update({_id:id},{title,content,time,tags:tags.split(','),isPublish})
+    Article.update({_id:id},{title,content,time,tags:tags.split(','),isPublish,summary})
         .then(result=>{
             console.log(result);
             responseClient(res,200,0,'更新成功',result)

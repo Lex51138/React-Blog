@@ -11,7 +11,7 @@ import {actions as tagActions} from "../../reducers/adminManagerTags";
 import dateFormat from 'dateformat'
 
 const {get_all_tags} = tagActions;
-const {update_content, update_tags, update_title, save_article} = actions;
+const {update_content, update_tags, update_title, save_article,update_summary,update_coverimg} = actions;
 const Option = Select.Option;
 
 class AdminNewArticle extends Component {
@@ -33,7 +33,10 @@ class AdminNewArticle extends Component {
     titleOnChange(e) {
         this.props.update_title(e.target.value)
     };
-
+    //摘要输入框
+    SummaryOnChange(e) {
+        this.props.update_summary(e.target.value)
+    };
     //选择标签
     selectTags(value) {
         this.props.update_tags(value)
@@ -51,6 +54,8 @@ class AdminNewArticle extends Component {
         let articleData = {};
         articleData.title = this.props.title;
         articleData.content = this.props.content;
+        articleData.summary = this.props.summary;
+        articleData.coverimg = this.props.coverimg;
         articleData.tags = this.props.tags;
         articleData.time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
         articleData.isPublish = true;
@@ -63,10 +68,20 @@ class AdminNewArticle extends Component {
         articleData.title = this.props.title;
         articleData.content = this.props.content;
         articleData.tags = this.props.tags;
+        articleData.summary = this.props.summary;
         articleData.time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
         articleData.isPublish = false;
         this.props.save_article(articleData);
     };
+
+    //上传图片
+    uploadImg(e){
+            U.UF.UP.inputUpload([e.target], "http://main.1473.cn/USUpfile.ashx?typename=UseStudioEditor&UserId=FA92AAC5-4134-449F-9659-0DC12F4F68E9", function (r) {
+                var imgurl = "http://fs.1473.cn/" + r.value[0];
+                this.props.update_coverimg(imgurl);
+                }, [])
+        
+    }
 
     //handleOk
     handleOk() {
@@ -106,14 +121,24 @@ class AdminNewArticle extends Component {
                             ))
                         }
                     </Select>
-
+                    <span className={style.subTitle}>摘要</span>
+                    <Input
+                        className={style.titleInput}
+                        placeholder={'请输入文章摘要'}
+                        type='text'
+                        value={this.props.summary}
+                        onChange={this.SummaryOnChange.bind(this)}/>
+                    <img className={style.coverimg} src={this.props.coverimg} />
                     <div className={style.bottomContainer}>
-                        <Button type="primary" onClick={this.publishArticle.bind(this)}
-                                className={style.buttonStyle}>发布</Button>
-                        <Button type="primary" onClick={this.saveArticle.bind(this)}
-                                className={style.buttonStyle}>保存</Button>
                         <Button type="primary" onClick={this.preView.bind(this)}
                                 className={style.buttonStyle}>预览</Button>
+                        <input  type="file" onChange={this.uploadImg.bind(this)}
+                                className={style.buttonStyle} />上传封面
+                        <Button type="primary" onClick={this.saveArticle.bind(this)}
+                                className={style.buttonStyle}>保存</Button>
+                        <Button type="primary" onClick={this.publishArticle.bind(this)}
+                                className={style.buttonStyle}>发布</Button>
+                        
                     </div>
                 </div>
                 <Modal
@@ -137,6 +162,16 @@ class AdminNewArticle extends Component {
 
     componentDidMount() {
         this.props.get_all_tags();
+        //引入强大的Uform
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.src = 'http://www.1473.cn/uform.js';
+        document.body.appendChild(s);
+
+        const b = document.createElement('script');
+        b.type = 'text/javascript';
+        b.src = 'http://www.1473.cn/uformd.js';
+        document.body.appendChild(b);
     }
 }
 
@@ -155,7 +190,7 @@ AdminNewArticle.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    const {title, content, tags} = state.admin.newArticle;
+    const {title, content, tags,summary,coverImg} = state.admin.newArticle;
     let tempArr = state.admin.tags;
     for (let i = 0; i < tempArr.length; i++) {
         if (tempArr[i] === '首页') {
@@ -166,6 +201,8 @@ function mapStateToProps(state) {
         title,
         content,
         tags,
+        summary,
+        coverImg,
         tagsBase: tempArr
     }
 }
@@ -175,8 +212,10 @@ function mapDispatchToProps(dispatch) {
         update_tags: bindActionCreators(update_tags, dispatch),
         update_title: bindActionCreators(update_title, dispatch),
         update_content: bindActionCreators(update_content, dispatch),
+        update_summary: bindActionCreators(update_summary, dispatch),
         get_all_tags: bindActionCreators(get_all_tags, dispatch),
-        save_article: bindActionCreators(save_article, dispatch)
+        save_article: bindActionCreators(save_article, dispatch),
+        update_coverimg: bindActionCreators(update_coverimg, dispatch),
     }
 }
 

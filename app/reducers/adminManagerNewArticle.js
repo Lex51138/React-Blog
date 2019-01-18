@@ -2,14 +2,18 @@ const initialState={
     title:'',
     content:'',
     tags:[],
-    id:''
+    id:'',
+    summary:'',
+    coverImg:''
 };
 export const actionTypes = {
     UPDATING_TITLE:"UPDATING_TITLE",
     UPDATING_CONTENT:"UPDATING_CONTENT",
     UPDATING_TAGS:"UPDATING_TAGS",
     SAVE_ARTICLE:"SAVE_ARTICLE",
-    SET_ARTICLE_ID:"SET_ARTICLE_ID"
+    SET_ARTICLE_ID:"SET_ARTICLE_ID",
+    UPDATING_SUMMARY:"UPDATING_SUMMARY",
+    UPDATE_COVERIMG:"UPDATE_COVERIMG"
 };
 export const actions = {
     update_title:function (title) {
@@ -35,7 +39,19 @@ export const actions = {
             type:actionTypes.SAVE_ARTICLE,
             data
         }
-    }
+     },
+     update_summary:(summary)=>{
+        return{
+            type:actionTypes.UPDATING_SUMMARY,
+            summary
+        }
+     },
+     update_coverimg:(coverimg)=>{
+        return{
+            type:actionTypes.UPDATE_COVERIMG,
+            coverimg
+        }
+     }
 };
 
 
@@ -57,6 +73,14 @@ export function reducer(state=initialState,action) {
             return{
                 ...state,id:action.id
             };
+        case actionTypes.UPDATING_SUMMARY:
+            return{
+                ...state,summary:action.summary
+            };
+        case actionTypes.UPDATE_COVERIMG:
+            return{
+                ...state,coverimg:action.coverimg
+            }
         default:
             return state;
     }

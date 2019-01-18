@@ -85,6 +85,7 @@
     "open-browser-webpack-plugin": "0.0.5",
     "postcss-loader": "^2.0.6",
     "progress-bar-webpack-plugin": "^1.10.0",
+    "rc-queue-anim": "^1.6.10",
     "rc-texty": "^0.2.0",
     "rc-tween-one": "^2.2.22",
     "react-hot-loader": "^3.0.0-beta.6",

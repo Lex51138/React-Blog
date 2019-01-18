@@ -14,5 +14,5 @@ module.exports = new mongoose.Schema({
     author:String,//作者
     tags:Array,//标签
     isPublish:Boolean,//是否发布
-    Summary:String//摘要
+    summary:String//摘要
 });

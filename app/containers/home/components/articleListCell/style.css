@@ -1,13 +1,14 @@
 .container{
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
     height: 165px;
     padding: 18px 10px;
+    margin-bottom: 20px;
     background: #fff;
     cursor: pointer;
     border-radius: 2px;
-
+    opacity: 0;
+    
 }
 .cover{
     display:block;
@@ -32,7 +33,7 @@
 }
 .container:hover{
     box-shadow: 3px 3px 7px #9a9292;
-    transition: all 0.3s;
+    transition: box-shadow 0.3s;
 }
 .container>div:first-child>img{
     width: auto;

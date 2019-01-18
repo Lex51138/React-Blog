@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {
     Redirect
 } from 'react-router-dom'
+import QueueAnim from 'rc-queue-anim'
 import style from './style.css'
 import ArticleList from "./components/articelList/ArticleList";
 import {Pagination} from 'antd';
@@ -31,6 +32,7 @@ class Home extends Component {
                         data={this.props.articleList}
                         getArticleDetail={this.props.get_article_detail}
                     />
+                    <QueueAnim className="Pagination" delay={1000}>
                     <div className={style.paginationContainer}>
                         <Pagination //ANTD分页工具
                             defaultPageSize={5}
@@ -40,6 +42,7 @@ class Home extends Component {
                             current={this.props.pageNum}
                             total={this.props.total}/>
                     </div>
+                    </QueueAnim>
                 </div>
         )
     }

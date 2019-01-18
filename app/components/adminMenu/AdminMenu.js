@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Menu, Icon} from 'antd'
-
+import "./style.css"
 const menus = [
     {url: '/', name: '首页', iconType: 'home'},
     {url: '/managerUser', name: '用户管理', iconType: 'usergroup-delete'},
@@ -16,7 +16,7 @@ export default class AdminMenu extends Component {
     render() {
         return (
             <div>
-                <Menu
+                <Menu className='Menu-box'
                     selectedKeys={[this.props.url]}
                     mode="inline"
                     theme="dark"

@@ -2,7 +2,7 @@
 ### 关于博客：
 要毕业了总感觉该干点什么,一时兴起就弄了个博客放Github上当个作品吧哈哈哈😏
 
-外网地址：www.lexblog.cn(正在部署)
+外网地址：www.lexblog.cn
 
 界面不算好看凑合着吧
 
@@ -64,7 +64,8 @@
 
 
 ## 项目运行效果
-- 首页
+还有功能尚未弄完
+<!-- - 首页
 ![index](./record/index.gif)
 
 - 管理员登录
@@ -79,7 +80,7 @@
 ![detail](./record/checkArticleDetail.gif)
 
 - 发文
-![newArticle](./record/new_article.gif)
+![newArticle](./record/new_article.gif) -->
 
 ## 环境
 ```

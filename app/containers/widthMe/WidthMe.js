@@ -26,7 +26,7 @@ export default class WidthMe extends Component{
               }
               description={
                 <div>
-                  <p className="abstract">前端打字员。</p>
+                  <p className="abstract">前端切图狮 🦁 。</p>
                   <p className="abstract">
                     <span>文章 - 0</span>
                     <span style={{ marginRight: 10, marginLeft: 10 }}>|</span>
