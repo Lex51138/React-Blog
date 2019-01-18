@@ -10,13 +10,13 @@ router.post('/addArticle', function (req, res) {
         content,
         time,
         tags,
-        coverImg,
+        coverimg,
         isPublish,
         summary
     } = req.body;
     let fmimg = `/${Math.round(Math.random() * 9 + 1)}.jpg`;//封面图片
     const author = req.session.userInfo.username;
-    coverImg==undefined?"":fmimg=coverImg;//判断是否有封面图没有的话就给他随机一张
+    coverimg==undefined?"":fmimg=coverimg;//判断是否有封面图没有的话就给他随机一张
     const viewCount = 0;
     const commentCount = 0;
     let tempArticle = new Article({

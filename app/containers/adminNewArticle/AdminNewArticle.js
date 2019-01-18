@@ -68,6 +68,7 @@ class AdminNewArticle extends Component {
         articleData.title = this.props.title;
         articleData.content = this.props.content;
         articleData.tags = this.props.tags;
+        articleData.coverimg = this.props.coverimg;
         articleData.summary = this.props.summary;
         articleData.time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
         articleData.isPublish = false;
@@ -75,11 +76,15 @@ class AdminNewArticle extends Component {
     };
 
     //上传图片
+    
     uploadImg(e){
-            U.UF.UP.inputUpload([e.target], "http://main.1473.cn/USUpfile.ashx?typename=UseStudioEditor&UserId=FA92AAC5-4134-449F-9659-0DC12F4F68E9", function (r) {
+        const input = e.target;// 保留input
+        const update_converimg = this.props.update_coverimg;//保留上传封面方法
+        // U.UF.CD.loadAjaxCrossDomain(
+            U.UF.UP.inputUpload([input], "http://main.1473.cn/USUpfile.ashx?typename=UseStudioEditor&UserId=FA92AAC5-4134-449F-9659-0DC12F4F68E9", function (r) {
                 var imgurl = "http://fs.1473.cn/" + r.value[0];
-                this.props.update_coverimg(imgurl);
-                }, [])
+                update_converimg(imgurl);
+            }, [])
         
     }
 
@@ -132,8 +137,11 @@ class AdminNewArticle extends Component {
                     <div className={style.bottomContainer}>
                         <Button type="primary" onClick={this.preView.bind(this)}
                                 className={style.buttonStyle}>预览</Button>
+                        <Button type="primary" 
+                                className={style.buttonStyle}>上传封面
                         <input  type="file" onChange={this.uploadImg.bind(this)}
-                                className={style.buttonStyle} />上传封面
+                                className={style.uploadbtn} />
+                                </Button>
                         <Button type="primary" onClick={this.saveArticle.bind(this)}
                                 className={style.buttonStyle}>保存</Button>
                         <Button type="primary" onClick={this.publishArticle.bind(this)}
@@ -165,13 +173,9 @@ class AdminNewArticle extends Component {
         //引入强大的Uform
         const s = document.createElement('script');
         s.type = 'text/javascript';
-        s.src = 'http://www.1473.cn/uform.js';
-        document.body.appendChild(s);
-
-        const b = document.createElement('script');
-        b.type = 'text/javascript';
-        b.src = 'http://www.1473.cn/uformd.js';
-        document.body.appendChild(b);
+        //改下了下Uform的上传功能 妈的跨域是假的 自己弄了一个 上传到了fs.1473的服务器并引用我改过的版本
+        s.src = 'http://fs.1473.cn/cb19b314-4d96-4667-b87c-1bd8560668a3.js';
+        document.body.appendChild(s);    
     }
 }
 
@@ -190,7 +194,7 @@ AdminNewArticle.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    const {title, content, tags,summary,coverImg} = state.admin.newArticle;
+    const {title, content, tags,summary,coverimg} = state.admin.newArticle;
     let tempArr = state.admin.tags;
     for (let i = 0; i < tempArr.length; i++) {
         if (tempArr[i] === '首页') {
@@ -202,7 +206,7 @@ function mapStateToProps(state) {
         content,
         tags,
         summary,
-        coverImg,
+        coverimg,
         tagsBase: tempArr
     }
 }

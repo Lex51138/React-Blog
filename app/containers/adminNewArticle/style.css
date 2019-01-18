@@ -12,6 +12,14 @@
     padding-left:20px;
     list-style: disc;
 }
+.uploadbtn{
+    width: 86px;
+    opacity: 0;
+    position: relative;
+    height: 27px;
+    right: 71px;
+    cursor: pointer;
+}
 .textArea{
     border:solid thin #ddd;
     margin:10px 0;
@@ -22,7 +30,11 @@
     color: #373737;
     font-size: 14px;
 }
-
+.coverimg{
+    width: 182px;
+    background-size: 100% 100%;
+    height: 116px;
+}
 .container{
     margin-top: 10px;
 }
