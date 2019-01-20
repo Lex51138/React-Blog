@@ -26,7 +26,7 @@ module.exports = {
         publicPath: '/',
         filename: '[name]-[hash:8].js'
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     module: {
         rules: [
             {

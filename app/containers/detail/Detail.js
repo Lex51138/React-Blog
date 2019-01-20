@@ -17,14 +17,14 @@ class Detail extends Component{
         const {articleContent,title,author,viewCount,commentCount,time} = this.props;
         return(
             <div className={style.container}>
-                <h2>{title}</h2>
+                <h2 className="detail_title">{title}</h2>
                 <div className={style.articleInfo}>
                     <span >
                         <img className={style.authorImg} src={require('./author.png')}/> {author}
                     </span>
-                    <span>
+                    <div className={style.time}>
                         <img src={require('./calendar.png')}/> {time}
-                    </span>
+                    </div>
                     <span>
                         <img src={require('./comments.png')}/> {commentCount}
                     </span>

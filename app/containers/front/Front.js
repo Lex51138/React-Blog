@@ -1,5 +1,5 @@
 import React,{Component,PropTypes} from 'react'
-import { BackTop, Col, Layout, Row } from 'antd'
+import { BackTop, Col, Layout, Row} from 'antd'
 import {connect} from 'react-redux'
 import {Detail} from '../detail'
 import {Home} from '../home'
@@ -19,7 +19,8 @@ import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 const {get_all_tags} = actions;
 const {get_article_list} = FrontActinos;
-const { Content } = Layout
+const {Content} = Layout
+import Footer from './Footer'
 
 class Front extends Component{
     constructor(props){
@@ -75,6 +76,7 @@ class Front extends Component{
                  </Col>
                 </Row>
             </Content>
+            <Footer/>
         </Layout>
                 </Layout>
         )

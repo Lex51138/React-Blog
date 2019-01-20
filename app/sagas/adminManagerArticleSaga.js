@@ -88,6 +88,10 @@ export function* editArticleFlow () {
                 let content = res.data.content;
                 let tags = res.data.tags;
                 let id = res.data._id;
+                let coverimg = res.data.coverImg;
+                let summary = res.data.summary;
+                yield put({type:NewArticleTypes.UPDATING_SUMMARY,summary});
+                yield put({type:NewArticleTypes.UPDATE_COVERIMG,coverimg});
                 yield put({type:NewArticleTypes.SET_ARTICLE_ID,id});
                 yield put({type:NewArticleTypes.UPDATING_TAGS,tags});
                 yield put({type:NewArticleTypes.UPDATING_CONTENT,content});
