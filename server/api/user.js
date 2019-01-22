@@ -80,6 +80,7 @@ router.post('/register', (req, res) => {
                             data.username = userInfo.username;
                             data.userType = userInfo.type;
                             data.userId = userInfo._id;
+                            data.avatar = userInfo.avatar;
                             responseClient(res, 200, 0, '注册成功', data);
                             return;
                         });

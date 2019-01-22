@@ -17,6 +17,7 @@ import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
 import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
+import Identicon from 'identicon.js';
 const {get_all_tags} = actions;
 const {get_article_list} = FrontActinos;
 const {Content} = Layout
@@ -30,7 +31,13 @@ class Front extends Component{
     render(){
         const {url} = this.props.match;
         const {login, register} = this.props;
-        // ?:
+        let hash,data; 
+        if(this.props.userInfo.userId==''||this.props.userInfo.userId==undefined){}
+        else{
+            hash = this.props.userInfo.userId;
+            data = new Identicon(hash).toString()
+        }
+        this.props.userInfo.avatar==""?this.props.userInfo.avatar=`data:image/png;base64,${data}`:"";
         return(
             <Layout>
              <BackTop />
