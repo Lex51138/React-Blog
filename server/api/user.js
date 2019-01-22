@@ -28,6 +28,7 @@ router.post('/login', (req, res) => {
             data.username = userInfo.username;
             data.userType = userInfo.type;
             data.userId = userInfo._id;
+            data.avatar = userInfo.avatar;
             //登录成功后设置session
             req.session.userInfo = data;
 
@@ -68,7 +69,8 @@ router.post('/register', (req, res) => {
             let user = new User({
                 username: userName,
                 password: md5(password + MD5_SUFFIX),//MD5+随机字符串加密
-                type: 'user'
+                type: 'user',
+                avatar:''
             });
             user.save()
                 .then(function () {

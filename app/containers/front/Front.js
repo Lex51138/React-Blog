@@ -30,6 +30,7 @@ class Front extends Component{
     render(){
         const {url} = this.props.match;
         const {login, register} = this.props;
+        // ?:
         return(
             <Layout>
              <BackTop />
