@@ -100,6 +100,22 @@ router.get('/userInfo',function (req,res) {
     }
 });
 
+//更换用户头像
+router.post('/useravatar',(req,res)=>{
+    const {uid,avatar} = req.query;
+    console.log(uid,avatar);
+    User.update({_id:uid},{avatar:avatar}).then(
+        User.findOne({_id:uid}).then(
+            (result)=>{
+                responseClient(res,200,0,'更换头像成功',result)
+            }
+        )
+    ).catch(err=>{
+        responseClient(res);
+        return;
+    });
+   
+})
 router.get('/logout',function (req,res) {
     req.session.destroy();
     res.redirect('/');

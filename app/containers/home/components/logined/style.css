@@ -1,3 +1,4 @@
+
 .container{
     height: 300px;
     width: 100%;
@@ -15,11 +16,20 @@
 .container p:nth-child(2){
     margin-top: 20px;
 }
-
+.fky{
+    width: 73px;
+    margin-top: 14px;
+    margin-bottom: 17px;
+}
 .container>img{
     width: 27%;
     margin-top: 20px;
 }
 .centerP{
-    margin:25px 0;
+    margin: 10px 0;
 }
+.loginOut_Btn{
+    margin-top: 12px;
+    margin-bottom: 18px;
+}
+

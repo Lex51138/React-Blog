@@ -63,3 +63,19 @@ export function* user_auth () {
         }
     }
 }
+
+export function* login_out() {
+    while(true){
+        yield take(IndexActionTypes.LOGIN_OUT);
+        try{
+            yield put({type:IndexActionTypes.FETCH_START});
+            yield call(get,'/user/logout');
+                yield put({type:IndexActionTypes.RESPONSE_USER_INFO,data:""})
+                yield put({type:IndexActionTypes.SET_MESSAGE,msgContent:'退出登陆成功',msgType:1});
+        }catch(err){
+            console.log(err)
+        }finally{
+            yield put({type: IndexActionTypes.FETCH_END});
+        }
+    }
+  }

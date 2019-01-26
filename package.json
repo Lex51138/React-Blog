@@ -1,6 +1,6 @@
 {
   "name": "React-blog",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "react-express-mongo demo",
   "main": "index.js",
   "scripts": {

@@ -18,7 +18,6 @@ export function* getArticleList (tag,pageNum) {
 export function* getArticlesListFlow () {
     while (true){
         let req = yield take(FrontActionTypes.GET_ARTICLE_LIST);
-        console.log(req);
         let res = yield call(getArticleList,req.tag,req.pageNum);
         if(res){
             if(res.code === 0){
@@ -53,5 +52,33 @@ export function* getArticleDetailFlow () {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
             }
         }
+    }
+}
+
+export function* updateUserAvatarFlow (){
+    while(true){
+        let req = yield take(FrontActionTypes.UPDATE_USER_AVATAR);
+        let res = yield call(updateUserAvatar,req.uid,req.avatar);
+        if(res){
+         if(res.code==0){
+            yield put({type: IndexActionTypes.RESPONSE_USER_INFO,data:res.data});
+            yield put({type:IndexActionTypes.SET_MESSAGE,msgContent:'更改头像成功，更改完头像需要重新登陆',msgType:1});
+         }
+            else{
+                yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
+        }
+        }
+    }
+}
+export function* updateUserAvatar(uid,avatar){
+    yield put({type: IndexActionTypes.FETCH_START})
+    try{
+        return yield call(post, `/user/useravatar?uid=${uid}&avatar=${avatar}`);
+    }
+    catch(err){
+        yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
+    }
+    finally{
+        yield put({type: IndexActionTypes.FETCH_END})
     }
 }

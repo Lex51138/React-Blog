@@ -9,7 +9,8 @@ export const actionTypes = {
     GET_ARTICLE_LIST: "GET_ARTICLE_LIST",
     RESPONSE_ARTICLE_LIST: "RESPONSE_ARTICLE_LIST",
     GET_ARTICLE_DETAIL: "GET_ARTICLE_DETAIL",
-    RESPONSE_ARTICLE_DETAIL: "RESPONSE_ARTICLE_DETAIL"
+    RESPONSE_ARTICLE_DETAIL: "RESPONSE_ARTICLE_DETAIL",
+    UPDATE_USER_AVATAR:"UPDATE_USER_AVATAR",
 };
 
 export const actions = {
@@ -25,6 +26,13 @@ export const actions = {
             type: actionTypes.GET_ARTICLE_DETAIL,
             id
         }
+    },
+    update_user_avatar:(uid,avatar)=>{
+        return{
+            type :actionTypes.UPDATE_USER_AVATAR,
+            avatar,
+            uid
+        }
     }
 };
 
@@ -37,8 +45,7 @@ export function reducer(state = initialState, action) {
         case actionTypes.RESPONSE_ARTICLE_DETAIL:
             return {
                 ...state, articleDetail: action.data
-            };
-
+            }
         default:
             return state;
     }

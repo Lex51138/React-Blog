@@ -19,7 +19,7 @@ import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 import Identicon from 'identicon.js';
 const {get_all_tags} = actions;
-const {get_article_list} = FrontActinos;
+const {get_article_list,update_user_avatar} = FrontActinos;
 const {Content} = Layout
 import Footer from './Footer'
 
@@ -27,7 +27,20 @@ class Front extends Component{
     constructor(props){
         super(props);
     }
-
+    onChangeClick = (e,uid)=>{
+        const input = e.target;// 保留input
+        const update_avatar = this.props.update_avatar//保留更改头像方法
+        // U.UF.CD.loadAjaxCrossDomain(
+        if(input!=undefined){//防止报错的判断
+            U.UF.UP.inputUpload([input], "http://main.1473.cn/USUpfile.ashx?typename=UseStudioEditor&UserId=FA92AAC5-4134-449F-9659-0DC12F4F68E9", function (r) {
+                var imgurl = "http://fs.1473.cn/" + r.value[0];
+                update_avatar(input.id,imgurl)
+            }, [])
+        }
+        }
+    LoginOut = ()=>{
+        this.props.login_out();   
+    }
     render(){
         const {url} = this.props.match;
         const {login, register} = this.props;
@@ -75,8 +88,14 @@ class Front extends Component{
                     >
                     <div className={`${style.loginContainer}`}>
                     <WidthMe />
-                            {this.props.userInfo.userId ?
-                            <Logined history={this.props.history} userInfo={this.props.userInfo}/> :
+                            {this.props.userInfo.userId 
+                            ?
+                            <Logined history={this.props.history} 
+                            userInfo={this.props.userInfo} 
+                            onChangeClick={this.onChangeClick} 
+                            LoginOut = {this.LoginOut}
+                            /> 
+                            :
                             <Login login={login} register={register}/>}  
                         </div>
                     </Col>
@@ -92,6 +111,23 @@ class Front extends Component{
 
     componentDidMount() {
         this.props.get_all_tags();
+    }
+    componentWillMount() { //在render前引用不然会报错
+        //引入强大的Uform
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        //改下了下Uform的上传功能 妈的跨域是假的 自己弄了一个 上传到了fs.1473的服务器并引用我改过的版本
+        s.src = 'http://fs.1473.cn/cb19b314-4d96-4667-b87c-1bd8560668a3.js';
+        document.body.appendChild(s);
+
+        //引入百度统计
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?c50445aac772fad4b0395330ce12cb78";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
     }
 }
 
@@ -114,7 +150,9 @@ function mapDispatchToProps(dispatch) {
         get_all_tags:bindActionCreators(get_all_tags,dispatch),
         get_article_list:bindActionCreators(get_article_list,dispatch),
         login: bindActionCreators(IndexActions.get_login, dispatch),
-        register: bindActionCreators(IndexActions.get_register, dispatch)
+        register: bindActionCreators(IndexActions.get_register, dispatch),
+        login_out:bindActionCreators(IndexActions.login_out,dispatch),
+        update_avatar:bindActionCreators(update_user_avatar,dispatch)
     }
 }
 export default connect(

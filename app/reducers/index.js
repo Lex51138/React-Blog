@@ -17,7 +17,8 @@ export const actionsTypes = {
     USER_REGISTER: "USER_REGISTER",
     RESPONSE_USER_INFO: "RESPONSE_USER_INFO",
     SET_MESSAGE: "SET_MESSAGE",
-    USER_AUTH:"USER_AUTH"
+    USER_AUTH:"USER_AUTH",
+    LOGIN_OUT:"LOGIN_OUT"
 };
 
 export const actions = {
@@ -26,6 +27,11 @@ export const actions = {
             type: actionsTypes.USER_LOGIN,
             username,
             password
+        }
+    },
+    login_out:()=>{
+        return{
+            type: actionsTypes.LOGIN_OUT
         }
     },
     get_register: function (data) {
