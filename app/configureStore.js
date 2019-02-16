@@ -2,8 +2,9 @@ import {createStore,applyMiddleware,compose} from 'redux'
 import rootReducer from './reducers'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './sagas'
+import DevTools from './DevTools'
 
-const win = window;
+
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [];
 
@@ -15,7 +16,7 @@ if(process.env.NODE_ENV==='production'){
 }else{
     storeEnhancers = compose(
         applyMiddleware(...middlewares,sagaMiddleware),
-        (win && win.devToolsExtension) ? win.devToolsExtension() : (f) => f,
+        DevTools.instrument()
     );
 }
 

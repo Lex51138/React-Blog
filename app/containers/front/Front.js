@@ -51,6 +51,8 @@ class Front extends Component{
             data = new Identicon(hash).toString()
         }
         this.props.userInfo.avatar==""?this.props.userInfo.avatar=`data:image/png;base64,${data}`:"";
+        let total;
+        this.props.total.length>0?total = this.props.total[0].total:total=0;
         return(
             <Layout>
              <BackTop />
@@ -87,7 +89,7 @@ class Front extends Component{
                         xxl={{ span: 6, offset: 1 }}
                     >
                     <div className={`${style.loginContainer}`}>
-                    <WidthMe />
+                    <WidthMe total={total}/>
                             {this.props.userInfo.userId 
                             ?
                             <Logined history={this.props.history} 
@@ -142,7 +144,8 @@ Front.propTypes = {
 function mapStateToProps(state) {
     return{
         categories:state.admin.tags,
-        userInfo: state.globalState.userInfo
+        userInfo: state.globalState.userInfo,
+        total:state.front.articleList
     }
 }
 function mapDispatchToProps(dispatch) {

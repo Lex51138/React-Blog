@@ -28,7 +28,7 @@ export default class WidthMe extends Component{
                 <div>
                   <p className="abstract">前端切图狮 🦁 。</p>
                   <p className="abstract">
-                    <span>文章 - 0</span>
+                    <span>文章 - {this.props.total}</span>
                     <span style={{ marginRight: 10, marginLeft: 10 }}>|</span>
                     <span>访问 - 0</span>
                   </p>

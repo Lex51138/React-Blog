@@ -4,7 +4,8 @@ const initialState={
     tags:[],
     id:'',
     summary:'',
-    coverimg:''
+    coverimg:'',
+    total:0
 };
 export const actionTypes = {
     UPDATING_TITLE:"UPDATING_TITLE",

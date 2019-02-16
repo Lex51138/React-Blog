@@ -1,6 +1,7 @@
 import {reducer as front} from './frontReducer'
 import {combineReducers} from 'redux'
 import admin from './admin'
+import {reply} from './reply'
 const initialState = {
     isFetching: true,
     msg: {
@@ -85,7 +86,8 @@ export function reducer(state = initialState, action) {
 export default combineReducers({
     front,
     globalState: reducer,
-    admin
+    admin,
+    reply
 })
 
 

@@ -59,6 +59,7 @@ class AdminNewArticle extends Component {
         articleData.tags = this.props.tags;
         articleData.time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
         articleData.isPublish = true;
+        articleData.total = this.props.total;
         this.props.save_article(articleData);
     };
 
@@ -72,6 +73,7 @@ class AdminNewArticle extends Component {
         articleData.summary = this.props.summary;
         articleData.time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
         articleData.isPublish = false;
+        articleData.total = this.props.total;
         this.props.save_article(articleData);
     };
 
@@ -195,6 +197,7 @@ AdminNewArticle.defaultProps = {
 
 function mapStateToProps(state) {
     const {title, content, tags,summary,coverimg} = state.admin.newArticle;
+    const total = state.front.articleList[0].total||state.admin.articles.articleList[0].total;
     let tempArr = state.admin.tags;
     for (let i = 0; i < tempArr.length; i++) {
         if (tempArr[i] === '首页') {
@@ -207,7 +210,8 @@ function mapStateToProps(state) {
         tags,
         summary,
         coverimg,
-        tagsBase: tempArr
+        tagsBase: tempArr,
+        total
     }
 }
 

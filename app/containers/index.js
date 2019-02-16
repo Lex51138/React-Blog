@@ -22,7 +22,7 @@ import Admin from "./admin/Admin";
 import Front from './front/Front'
 import animationStyle from '../lib/animate.css'
 const {clear_msg, user_auth} = actions;
-
+import DevTools from '../DevTools';
 class AppIndex extends Component {
 
     constructor(props) {
@@ -58,6 +58,7 @@ class AppIndex extends Component {
                             this.openNotification('success', this.props.notification.content) :
                             this.openNotification('error', this.props.notification.content)) :
                         null}
+                    {process.env.NODE_ENV === 'production'?"":<DevTools />}
                 </div>
             </Router>
         )

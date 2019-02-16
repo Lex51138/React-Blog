@@ -5,7 +5,10 @@ import {responseClient} from '../util'
 
 const router = Express.Router();
 
+router.use('/reply', require('./reply'));
+
 router.use('/user', require('./user'));
+
 //获取全部标签
 router.get('/getAllTags', function (req, res) {
     Tags.find(null, 'name').then(data => {
@@ -36,7 +39,7 @@ router.get('/getArticles', function (req, res) {
     Article.count(searchCondition)
         .then(count => {
             responseData.total = count;
-            Article.find(searchCondition, '_id title isPublish author viewCount commentCount time coverImg summary', {
+            Article.find(searchCondition, '_id title isPublish author viewCount commentCount time coverImg summary total', {
                 skip: skip,
                 limit: 5
             })

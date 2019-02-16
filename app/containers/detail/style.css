@@ -29,6 +29,12 @@
   font-size: 13px;
   line-height: 19px;
 }
+.Reply_Length{
+  margin: 2em 0px 0em;
+  color: #999;
+  /* font-weight: 400; */
+  font-size: 22px;
+}
 .time img{
   margin-top:-3px;
 }

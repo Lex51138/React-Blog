@@ -6,7 +6,12 @@ import {connect} from 'react-redux'
 import {actions} from "../../reducers/frontReducer";
 const {get_article_detail} = actions;
 import reactRenderer from 'remark-react'
+import Reply from'./components/reply/Reply'
 import style from './style.css'
+
+const ReplyLength = ({total})=>(
+    <p className={style.Reply_Length}>{`${total} 条评论`}</p>
+)
 class Detail extends Component{
     constructor(props){
         super(props);
@@ -16,6 +21,7 @@ class Detail extends Component{
     render(){
         const {articleContent,title,author,viewCount,commentCount,time} = this.props;
         return(
+            <div>
             <div className={style.container}>
                 <h2 className="detail_title">{title}</h2>
                 <div className={style.articleInfo}>
@@ -36,6 +42,9 @@ class Detail extends Component{
                     {remark().use(reactRenderer).processSync(articleContent).contents}
                 </div>
             </div>
+            <ReplyLength total={this.props.commentCount}/>
+            <Reply artid = {this.props.location.state.id}/>
+            </div>
         )
     }
 
@@ -52,7 +61,7 @@ function mapStateToProps(state) {
         author,
         viewCount,
         commentCount,
-        time
+        time,
     }
 }
 

@@ -12,7 +12,8 @@ router.post('/addArticle', function (req, res) {
         tags,
         coverimg,
         isPublish,
-        summary
+        summary,
+        total
     } = req.body;
     let fmimg = `/${Math.round(Math.random() * 9 + 1)}.jpg`;//封面图片
     const author = req.session.userInfo.username;
@@ -29,10 +30,20 @@ router.post('/addArticle', function (req, res) {
         author,
         coverImg:fmimg,
         summary,
-        tags:tags.split(',')
+        tags:tags.split(','),
+        total:total
     });
     tempArticle.save().then(data=>{
         responseClient(res,200,0,'保存成功',data)
+
+        Article.find({}).then( //更改文章总数字段
+            result=>{
+                console.log(result);
+                result.forEach(item => {
+                    Article.update({"_id":item._id},{total:parseInt(item.total)+1}).then()
+                })     
+            }
+        )
     }).cancel(err=>{
         console.log(err);
         responseClient(res);
@@ -65,6 +76,14 @@ router.get('/delArticle',(req,res)=>{
         .then(result=>{
             if(result.result.n === 1){
                 responseClient(res,200,0,'删除成功!')
+                Article.find({}).then( //更改文章总数字段
+                    result=>{
+                        console.log(result);
+                        result.forEach(item => {
+                            Article.update({"_id":item._id},{total:parseInt(item.total)-1}).then()
+                        })     
+                    }
+                )
             }else{
                 responseClient(res,200,1,'文章不存在');
             }
