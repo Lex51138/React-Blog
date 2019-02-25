@@ -81,7 +81,7 @@ module.exports = {
             "progress.env.NODE_ENV": JSON.stringify('production')
         }),
         new HtmlWebpackPlugin({ //构建html
-            title: "Lex blog",
+            title: "Lex —— 人在停止思考时就已经死了",
             showErrors: true,
             meta: {
                 viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'

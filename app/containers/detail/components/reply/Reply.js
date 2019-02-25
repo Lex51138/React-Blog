@@ -29,7 +29,7 @@ const Editor = ({
           id=""
           className='Reply_Btn'
         >
-         发表评论
+         发表评论&nbsp;<span className='shua_ni_ma'></span>
         </Button>
         <span className='qx' onClick={qxreply.bind(this)}>点我取消回复用户。</span>
       </Form.Item>
@@ -51,6 +51,19 @@ class Reply extends Component{
       data.replyid = e.target.id;
       data.requsername = requsername;
       this.props.add_reply(data);
+      //加载计时器15s结束可以继续评论
+      $(".Reply_Btn ")[0].disabled = true;
+      $("textarea")[0].value='';
+      $(".shua_ni_ma")[0].innerText = 15;
+      var shuanima = setInterval(()=>{
+        if($(".shua_ni_ma")[0].innerText==0){
+          clearInterval(shuanima);
+          $(".shua_ni_ma")[0].innerText = "";
+          $(".Reply_Btn ")[0].disabled = false;
+          return;
+        }
+        $(".shua_ni_ma")[0].innerText = ($(".shua_ni_ma")[0].innerText-1);
+      },1000)
       // this.props.get_article_detail(this.props.location.state.id);
     }
     qxreply = ()=>{
