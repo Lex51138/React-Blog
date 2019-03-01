@@ -17,7 +17,7 @@ const Editor = ({
   }) => (
     <div>
       <Form.Item>
-        <TextArea className='Reply_Content' rows={4} placeholder={initvalue} disabled={loging}/>
+        <TextArea className='Reply_Content' rows={4} maxlength="20" placeholder={initvalue} disabled={loging}/>
         </Form.Item>
       <Form.Item>
         <Button

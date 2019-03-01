@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import './reset.css'
 import {Detail} from './detail'
+import Resume from '../components/resuMe/Resume'
 import {Home} from './home'
 import Banner from "./components/banner/Banner";
 import Menus from "./components/menu/Menus";
@@ -50,6 +51,7 @@ class AppIndex extends Component {
                     <Switch>
                         <Route path='/admin' component={Admin}/>
                         <Route path='/404' component={NotFound}/>
+                        <Route path='/resume' component={Resume}/>
                         <Route component={Front}/>
                     </Switch>
                     {isFetching && <Loading/>}

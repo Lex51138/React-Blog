@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import { Link } from 'react-router-dom'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {connect} from 'react-redux'
 import {actions} from '../../reducers/index'
@@ -15,7 +16,9 @@ class AdminIndex extends Component {
         return(
             <div>
                 <h1 >Lex blog 后台管理</h1>
-                <a href='http://lexblog.cn/'>点我回到首页</a>
+                <Link to="/">
+                <a href=''>点我回到首页</a>
+                </Link>
             </div>
         )
 

@@ -10,26 +10,35 @@ import { reply } from '../../app/reducers/reply';
 
 //添加评论
 router.post('/addReply',(req,res)=>{
+
     let {artid,content,userid,username,time,replyid,requsername} = req.body;
-    let newReply = new Reply({
-        artid,
-        content,
-        userid,
-        username,
-        time,
-        replyid,
-        requsername
-    })
-    newReply.save().then(data=>{
-        Article.findOne({_id:artid}).then(result=>{
-            console.log(result);
-            Article.update({_id:artid},{commentCount:(result.commentCount+1)}).then(()=>{
-                responseClient(res, 200, 0, '评论成功', data);
-            });
+    if(req.session.userInfo){
+        Reply.findOne({artid,content}).then(result=>{
+            console.log(result,'cnm');
+            let newReply = new Reply({
+                artid,
+                content,
+                userid,
+                username,
+                time,
+                replyid,
+                requsername
+            })
+            newReply.save().then(data=>{
+                Article.findOne({_id:artid}).then(result=>{
+                    console.log(result);
+                    Article.update({_id:artid},{commentCount:(result.commentCount+1)}).then(()=>{
+                        responseClient(res, 200, 0, '评论成功', data);
+                    });
+                })
+            }).catch((err)=>{
+                responseClient(err);
+            })
         })
-    }).catch((err)=>{
-        responseClient(err);
-    })
+    }
+    else{
+        responseClient(res,500,1,'刷你麻痹')
+    }
 })
 
 //获取文章的评论
