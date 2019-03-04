@@ -8,6 +8,7 @@
     cursor: pointer;
     border-radius: 2px;
     opacity: 0;
+    transition: all 0.4s;
     
 }
 .cover{
@@ -32,8 +33,11 @@
     margin-top:0px;
 }
 .container:hover{
-    box-shadow: 3px 3px 7px #9a9292;
-    transition: box-shadow 0.3s;
+    background: #effbff;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,.1);
+}
+.container:hover>span{
+    left: 10px;
 }
 .container>div:first-child>img{
     width: 186px;
@@ -98,7 +102,9 @@
     color: #108ee9;
     margin-top: 16px;
     font-weight: 600;
+    overflow: hidden;
 }
 .lastSpan>span{
     font-size: 12px;
+    position: relative;
 }
