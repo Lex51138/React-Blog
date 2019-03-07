@@ -15,12 +15,16 @@ import {actions} from '../../reducers/adminManagerTags'
 import {actions as FrontActinos} from '../../reducers/frontReducer'
 import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
+import axios from 'axios'
 import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 import Identicon from 'identicon.js';
 const {get_all_tags} = actions;
 const {get_article_list,update_user_avatar} = FrontActinos;
 const {Content} = Layout
+var $ = require('jquery');
+window.$ = $;
+
 import Footer from './Footer'
 
 class Front extends Component{
@@ -30,13 +34,37 @@ class Front extends Component{
     onChangeClick = (e,uid)=>{
         const input = e.target;// 保留input
         const update_avatar = this.props.update_avatar//保留更改头像方法
-        // U.UF.CD.loadAjaxCrossDomain(
-        if(input!=undefined){//防止报错的判断
-            U.UF.UP.inputUpload([input], "http://main.1473.cn/USUpfile.ashx?typename=UseStudioEditor&UserId=FA92AAC5-4134-449F-9659-0DC12F4F68E9", function (r) {
-                var imgurl = "http://fs.1473.cn/" + r.value[0];
-                update_avatar(input.id,imgurl)
-            }, [])
-        }
+
+
+        var f=input.files[0];
+        var formData=new FormData();
+        formData.append('smfile',f);
+
+        $.ajax({
+            url: 'https://sm.ms/api/upload',
+            type: 'POST',
+            success: function (data) {
+                update_avatar(input.id,data.data.url);
+            },
+            error: function (data) {
+                console.log(data);
+            },
+
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        })
+        // if(input!=undefined){//防止报错的判断
+        //     axios.post('https://sm.ms/api/upload',{
+        //         method: 'POST',
+        //         headers: myHeaders,
+        //         mode: 'cors',
+        //         body: JSON.stringify({smfile:input.files[0],ssl:false}),
+        //     }).then(result=>{//向图床发送请求 这里注意 如果是本地运行要改成http 服务器端运行（有https证书的话）前缀改成https
+               
+        //     })
+        // }
         }
     LoginOut = ()=>{
         this.props.login_out();   
@@ -115,13 +143,6 @@ class Front extends Component{
         this.props.get_all_tags();
     }
     componentWillMount() { //在render前引用不然会报错
-        //引入强大的Uform
-        const s = document.createElement('script');
-        s.type = 'text/javascript';
-        //改下了下Uform的上传功能 妈的跨域是假的 自己弄了一个 上传到了fs.1473的服务器并引用我改过的版本
-        s.src = 'http://fs.1473.cn/cb19b314-4d96-4667-b87c-1bd8560668a3.js';
-        document.body.appendChild(s);
-
         //引入百度统计
         var _hmt = _hmt || [];
         (function () {

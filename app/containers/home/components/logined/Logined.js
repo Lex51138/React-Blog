@@ -5,7 +5,7 @@ import {Button} from 'antd'
 export const Logined = (props) => (
     <div className={style.container}>
         <img src={props.userInfo.avatar}/>
-        <input type="file" className={style.fky} id={props.userInfo.userId} onChange={props.onChangeClick.bind(this)}/>
+        <input type="file" name="tnm" className={style.fky} id={props.userInfo.userId} onChange={props.onChangeClick.bind(this)}/>
         <p>欢迎：{props.userInfo.username}</p>
         <p className={style.centerP}>访问偶的博客~</p>
         {props.userInfo.userType === 'admin' ?

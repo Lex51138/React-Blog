@@ -3,6 +3,7 @@ import Express from 'express'
 import favicon from 'serve-favicon'
 import httpProxy from 'http-proxy'
 import compression from 'compression'
+var cors = require('cors')
 import config from '../config/config'
 import connectHistoryApiFallback from 'connect-history-api-fallback'
 
@@ -10,7 +11,7 @@ import connectHistoryApiFallback from 'connect-history-api-fallback'
 const app = new Express();
 const port = config.port;
 
-
+app.use(cors())
 //原本想另起一个服务处理api请求的。。端口一直被占用就算了 反正也没什么人访问 服务器无压力QAQ
 
 // const proxy = httpProxy.createProxyServer({//反向代理API请求

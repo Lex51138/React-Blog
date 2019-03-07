@@ -10,7 +10,8 @@ import {
   const TextArea = Input.TextArea;
   import dateFormat from 'dateformat'
   import style from './style.less'
-
+  var $ = require('jquery');
+  window.$ = $;
   
 const Editor = ({
     onSubmit, submitting,loging,initvalue,qxreply

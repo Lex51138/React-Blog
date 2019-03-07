@@ -13,6 +13,8 @@ import dateFormat from 'dateformat'
 const {get_all_tags} = tagActions;
 const {update_content, update_tags, update_title, save_article,update_summary,update_coverimg} = actions;
 const Option = Select.Option;
+var $ = require('jquery');
+window.$ = $;
 
 class AdminNewArticle extends Component {
     constructor(props) {
@@ -82,12 +84,24 @@ class AdminNewArticle extends Component {
     uploadImg(e){
         const input = e.target;// 保留input
         const update_converimg = this.props.update_coverimg;//保留上传封面方法
-        // U.UF.CD.loadAjaxCrossDomain(
-            U.UF.UP.inputUpload([input], "http://main.1473.cn/USUpfile.ashx?typename=UseStudioEditor&UserId=FA92AAC5-4134-449F-9659-0DC12F4F68E9", function (r) {
-                var imgurl = "http://fs.1473.cn/" + r.value[0];
-                update_converimg(imgurl);
-            }, [])
-        
+        //上传图片
+        var f=input.files[0];
+        var formData=new FormData();
+        formData.append('smfile',f);
+        $.ajax({
+            url: 'https://sm.ms/api/upload',
+            type: 'POST',
+            success: function (data) {
+                update_converimg(data.data.url);
+            },
+            error: function (data) {
+                console.log(data);
+            },
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        })
     }
 
     //handleOk
@@ -168,16 +182,6 @@ class AdminNewArticle extends Component {
             </div>
 
         )
-    }
-
-    componentDidMount() {
-        this.props.get_all_tags();
-        //引入强大的Uform
-        const s = document.createElement('script');
-        s.type = 'text/javascript';
-        //改下了下Uform的上传功能 妈的跨域是假的 自己弄了一个 上传到了fs.1473的服务器并引用我改过的版本
-        s.src = 'http://fs.1473.cn/cb19b314-4d96-4667-b87c-1bd8560668a3.js';
-        document.body.appendChild(s);    
     }
 }
 
