@@ -107,7 +107,7 @@ class Resume extends React.Component {
                       className={currentIndex === index ? 'dot' : 'item'}
                     />
                   </Tooltip>
-                </div>
+                </div> 
               ))}
             </div>
             {/* 向上的小图标 */}

@@ -92,7 +92,7 @@ module.exports = {
         new HtmlWebpackPlugin({//构建html
             title: "Lex Blog — 人在停止思考时就已经死了",
             showErrors: true,
-            meta:{viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
+            template: './template/template.html'
         }),
         new webpack.NoEmitOnErrorsPlugin(),//保证出错时页面不阻塞，且会在编译结束后报错
         new webpack.HashedModuleIdsPlugin(),//用 HashedModuleIdsPlugin 可以轻松地实现 chunkhash 的稳定化
