@@ -5,6 +5,8 @@ import {responseClient} from '../util'
 
 const router = Express.Router();
 
+router.use('/decision', require('./decision'));
+
 router.use('/reply', require('./reply'));
 
 router.use('/user', require('./user'));

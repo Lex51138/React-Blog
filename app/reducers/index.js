@@ -2,6 +2,7 @@ import {reducer as front} from './frontReducer'
 import {combineReducers} from 'redux'
 import admin from './admin'
 import {reply} from './reply'
+import {decision} from './decision'
 const initialState = {
     isFetching: true,
     msg: {
@@ -87,7 +88,8 @@ export default combineReducers({
     front,
     globalState: reducer,
     admin,
-    reply
+    reply,
+    decision
 })
 
 

@@ -24,7 +24,8 @@ class Home extends Component {
         return (
             tags.length > 1 && this.props.match.params.tag && (tags.indexOf(this.props.match.params.tag) === -1 || this.props.location.pathname.lastIndexOf('\/') > 0)//判断URL是否有这个标签没有则重定向路由404
                 ?
-                <Redirect to='/404'/>
+                // <Redirect to='/404'/>
+                ""
                 :
                 <div className={style.container}>
                     <ArticleList //渲染文章列表

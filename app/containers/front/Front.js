@@ -2,6 +2,7 @@ import React,{Component,PropTypes} from 'react'
 import { BackTop, Col, Layout, Row} from 'antd'
 import {connect} from 'react-redux'
 import {Detail} from '../detail'
+import decision from '../decision/Decision'
 import {Home} from '../home'
 import style from './style.less'
 import {
@@ -9,13 +10,12 @@ import {
     Route
 } from 'react-router-dom'
 import Menus from "../components/menu/Menus";
-import NotFound from "../../components/notFound/NotFound";
+
 import {bindActionCreators} from 'redux'
 import {actions} from '../../reducers/adminManagerTags'
 import {actions as FrontActinos} from '../../reducers/frontReducer'
 import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
-import axios from 'axios'
 import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 import Identicon from 'identicon.js';
@@ -55,16 +55,6 @@ class Front extends Component{
             contentType: false,
             processData: false
         })
-        // if(input!=undefined){//防止报错的判断
-        //     axios.post('https://sm.ms/api/upload',{
-        //         method: 'POST',
-        //         headers: myHeaders,
-        //         mode: 'cors',
-        //         body: JSON.stringify({smfile:input.files[0],ssl:false}),
-        //     }).then(result=>{//向图床发送请求 这里注意 如果是本地运行要改成http 服务器端运行（有https证书的话）前缀改成https
-               
-        //     })
-        // }
         }
     LoginOut = ()=>{
         this.props.login_out();   
@@ -101,10 +91,11 @@ class Front extends Component{
                     >
                     <div className={style.content}>
                         <Switch>
+                            <Route path={`/小决定`} component={decision}/>
                             <Route exact path={url} component={Home}/>
                             <Route path={`/detail/:id`} component={Detail}/>
                             <Route path={`/:tag`} component={Home}/>
-                            <Route component={NotFound}/>
+                            {/* <Route component={NotFound}/> */}
                         </Switch>
                     </div>
                     </Col>
