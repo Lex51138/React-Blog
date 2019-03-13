@@ -7,7 +7,8 @@ export const actionTypes = {
     'GET_DECISION':"GET_DECISION",
     "RESOLVE_GET_DECISION":"RESOLVE_GET_DECISION",
     "UPDATE_DECISION":"UPDATE_DECISION",
-    "ADD_DECISION":"ADD_DECISION"
+    "ADD_DECISION":"ADD_DECISION",
+    "UPDATE_CURRENTLIST":"UPDATE_CURRENTLIST",
 }
 
 export const actions = {
@@ -24,6 +25,10 @@ export const actions = {
     add_decision:(data)=>{
         type: actionTypes.ADD_DECISION,
         data
+    },
+    update_currentlist:(data)=>{
+        type: actionTypes.UPDATE_CURRENTLIST
+        data
     }
 }
 
@@ -37,12 +42,17 @@ export const decision = (state = initialState,action)=>{
         case actionTypes.ADD_DECISION:
         return{
             ...state,
-            indexlist:state.concat(action.data)
+            indexlist:state.indexlist.concat(action.data)
         };
         case actionTypes.UPDATE_DECISION:
         return{
             ...state,
             indexlist:list
+        };
+        case actionTypes.UPDATE_CURRENTLIST:
+        return{
+            ...state,
+            currentlist:action.data
         }
         default:
         return state;

@@ -1,9 +1,5 @@
 import React from 'react'
 import style from './style.css'
-import test1 from '../../../../../static/1.jpg'
-import test2 from '../../../../../static/2.jpg'
-import test3 from '../../../../../static/3.jpg'
-import test4 from '../../../../../static/4.jpg'
 import {Link} from 'react-router-dom'
 
 export const ArticleListCell = (props)=>(
