@@ -1,6 +1,9 @@
 const initialState = {
     indexlist : [],
-    currentlist : []
+    currentlist : {
+        title:"",
+        itemarr:[]
+    }
 };
 
 export const actionTypes = {
@@ -12,24 +15,24 @@ export const actionTypes = {
 }
 
 export const actions = {
-    get_decision:(userid)=>{
+    get_decision:(userid)=>({
         type: actionTypes.GET_DECISION,
         userid
-    },
-    update_decision:(did,list,i)=>{
+    }),
+    update_decision:(did,list,i)=>({
         type: actionTypes.UPDATE_DECISION,
         did,
-        list
+        list,
         i
-    },
-    add_decision:(data)=>{
+    }),
+    add_decision:(data)=>({
         type: actionTypes.ADD_DECISION,
         data
-    },
-    update_currentlist:(data)=>{
-        type: actionTypes.UPDATE_CURRENTLIST
+    }),
+    update_currentlist:(data)=>({
+        type: actionTypes.UPDATE_CURRENTLIST,
         data
-    }
+    })
 }
 
 export const decision = (state = initialState,action)=>{

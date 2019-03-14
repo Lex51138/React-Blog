@@ -14,7 +14,6 @@ router.post('/addReply',(req,res)=>{
     let {artid,content,userid,username,time,replyid,requsername} = req.body;
     if(req.session.userInfo){
         Reply.findOne({artid,content}).then(result=>{
-            console.log(result,'cnm');
             let newReply = new Reply({
                 artid,
                 content,

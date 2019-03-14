@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom'
 import { actions as decisionActinos } from '../../reducers/decision'
 const { get_decision } = decisionActinos
 import './style.less';
-
-
 export const emoji = ["🍻","🍲","🎲","💴","❤","🎃","🤔",'🎁',"👨‍🎓","🏃‍","✈"];
+
 const Todo = (item) => (//小决定首页渲染决定组件
     <div className='Index_Item_Box'>
-        <div className="Index_Item"><span>🤔</span><span>item</span><a >&#xe68b;</a><a>&#xe600;</a></div>
+        <div className="Index_Item"><span>{emoji[item.model]}</span><span>{item.title}</span><a >&#xe68b;</a><a>&#xe600;</a></div>
     </div>
 )
 class Index extends Component {
@@ -19,7 +18,7 @@ class Index extends Component {
         super(props);
     }
     render() {
-        const {indexlist} = this.props
+        const {indexlist} = this.props;
         const goBack= ()=>{
             history.go(-1);
         }
@@ -44,17 +43,23 @@ class Index extends Component {
             </div>
         )
     }
+    componentDidMount(){
+        this.props.get_decision(this.props.location.state.userid);
+    }
 }
 
 
 Index.defaultProps = {
     indexlist: [],
-    currentlist: []
+    userId:''
 };
 
 function mapStateToProps(state) {
+    let {userId} = state.globalState.userInfo
+    let {indexlist} = state.decision;
     return {
-        indexlist: state.indexlist
+        indexlist,
+        userId,
     }
 }
 function mapDispatchToProps(dispatch) {

@@ -74,7 +74,7 @@ class Front extends Component{
         return(
             <Layout>
              <BackTop />
-              <Menus getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
+              <Menus userid = {this.props.userInfo.userId} getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
             <Layout>
              <Content>
                 <Row >
@@ -146,7 +146,8 @@ class Front extends Component{
 }
 
 Front.defaultProps = {
-    categories:[]
+    categories:[],
+    userInfo:""
 };
 
 Front.propTypes = {

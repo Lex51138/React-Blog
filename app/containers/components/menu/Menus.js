@@ -57,7 +57,6 @@ export default class Menus extends Component{
 
     
     handleClick = (e) => { //标签点击
-        console.log('click ', e);
         if(e.key === '首页'){
             this.props.getArticleList('');
         }else{
@@ -67,6 +66,11 @@ export default class Menus extends Component{
         this.setState({
             current: e.key,
         });
+        if(e.key === '小决定'){
+            toPath='/'+e.key+'/'+this.props.userid
+            this.props.history.push(toPath);
+            // this.props.history.push(toPath);
+        }
         this.props.history.push(toPath);
     };
 
