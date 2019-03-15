@@ -8,19 +8,25 @@ import Title from 'antd/lib/skeleton/Title';
 export function* get_decision_flow(){
     while(true){
         let req = yield take(decisionActionTypes.GET_DECISION);
-        let res = yield call(get_decision,req.userid);
+        let res = yield call(get_decision,req.userid,req.getone,req.did);
         if(res.code==0){
-            yield put({type:decisionActionTypes.RESOLVE_GET_DECISION,data:res.data})
+            if(req.getone=='1'){
+                yield put({type:decisionActionTypes.UPDATE_CURRENTLIST,data:res.data})
+            }
+            else{
+                yield put({type:decisionActionTypes.RESOLVE_GET_DECISION,data:res.data})
+            }
+            
         }
         else{
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
         }
     }
 }
-export function* get_decision(userid){
+export function* get_decision(userid,getone,did){
     yield put({type:IndexActionTypes.FETCH_START});
     try{
-        return yield call(get,`/decision/getDecision?userid=${userid}`);
+        return yield call(get,`/decision/getDecision?userid=${userid}&getone=${getone}&did=${did}`);
     }
     catch(err){
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});

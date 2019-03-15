@@ -15,9 +15,11 @@ export const actionTypes = {
 }
 
 export const actions = {
-    get_decision:(userid)=>({
+    get_decision:(userid,getone,did)=>({
         type: actionTypes.GET_DECISION,
-        userid
+        userid,
+        getone,
+        did
     }),
     update_decision:(did,list,i)=>({
         type: actionTypes.UPDATE_DECISION,

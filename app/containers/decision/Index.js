@@ -8,15 +8,21 @@ const { get_decision } = decisionActinos
 import './style.less';
 export const emoji = ["🍻","🍲","🎲","💴","❤","🎃","🤔",'🎁',"👨‍🎓","🏃‍","✈"];
 
-const Todo = (item) => (//小决定首页渲染决定组件
-    <div className='Index_Item_Box'>
-        <div className="Index_Item"><span>{emoji[item.model]}</span><span>{item.title}</span><a >&#xe68b;</a><a>&#xe600;</a></div>
+const Todo = ({item,editClick,delClick}) => (//小决定首页渲染决定组件
+    <div className='Index_Item_Box Index' id={item._id}>
+        <div className="Index_Item">
+        <Link to={''}><span>{emoji[item.model]}</span><span className='sp-Span'>{item.title}</span></Link>
+        <a className='del'>&#xe600;</a>
+       <Link to={`/小决定/create/${item._id}`}><a className='edit'>&#xe68b;</a></Link>
+        </div>
     </div>
+
 )
 class Index extends Component {
     constructor(props){
         super(props);
     }
+    
     render() {
         const {indexlist} = this.props;
         const goBack= ()=>{
@@ -27,24 +33,25 @@ class Index extends Component {
                 <div className="Index_Head">
                     <a className='Index_Head_Return' onClick={goBack}>&#xe8b5;</a>
                     {/* <span>tips:手机打开体验更佳</span> */}
-                    <Link to="/小决定/add"><a className="Index_Head_Add">&#xe601;</a></Link>
-                    
+                    <Link to="/小决定/add"><a className="Index_Head_Add">&#xe601;</a></Link>                    
                 </div>
                 <h1>决定</h1>
                 <div className='Index_Todo_Box'>
                     {
                         indexlist.length == 0 ?
                             <div className='nothing'>点击右上角的+创建小决定吧</div>
-                            : indexlist.map((item) => {
-                                <Todo item={item} />
-                            })
-                    }
+                            : indexlist.map((item,key) => (
+                                <Todo item={item}/>
+                            ))
+                        }
                 </div>
             </div>
         )
     }
     componentDidMount(){
-        this.props.get_decision(this.props.location.state.userid);
+        let userid = this.props.location.pathname;
+        userid = userid.replace('/小决定/','');
+        this.props.get_decision(userid,0,'');
     }
 }
 

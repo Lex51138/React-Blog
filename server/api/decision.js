@@ -5,12 +5,22 @@ import {responseClient} from '../util'
 
 //获取用户的小决定
 router.get('/getDecision',(req,res)=>{
-    let{userid} = req.query;
-    Decision.find({'userid':userid}).then(data=>{
-        responseClient(res, 200, 0, 'success', data);
-    }).catch(err=>{
-        responseClient(err);
-    })
+    let{userid,getone,did} = req.query;
+    if(getone=="1"){
+        Decision.findOne({'_id':did}).then(data=>{
+            responseClient(res, 200, 0, 'success', data);
+        }).catch(err=>{
+            responseClient(err);
+        })
+    }
+    else{
+        Decision.find({'userid':userid}).then(data=>{
+            responseClient(res, 200, 0, 'success', data);
+        }).catch(err=>{
+            responseClient(err);
+        })
+    }
+  
 })
 //添加小决定
 router.post('/addDecision',(req,res)=>{

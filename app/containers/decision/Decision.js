@@ -19,7 +19,7 @@ class Decision extends Component {
                 <Switch>
                 <Route path={'/小决定/add'} component={AddChoice} />
                 <Route path={'/小决定/create/:model'} component={CreateChoice} />
-                <Route path='/小决定/:userid' component={Index} />        
+                <Route path='/小决定/:id' component={Index} />        
                     {/* <Route component={NotFound}/> */}
                 </Switch>
              </div>
