@@ -6,7 +6,7 @@ import {saveArticleFlow} from './adminManagerNewArticleSaga'
 import {getArticleListFlow,deleteArticleFlow,editArticleFlow} from './adminManagerArticleSaga'
 import {getArticlesListFlow,getArticleDetailFlow,updateUserAvatarFlow} from './frontSaga'
 import {get_reply_flow,add_reply_flow} from './replySaga'
-import {get_decision_flow,add_decision_flow,update_decision_flow,update_currentlist_flow} from './decisionSaga'
+import {del_decision_flow,get_decision_flow,add_decision_flow,update_decision_flow,update_currentlist_flow} from './decisionSaga'
 export default function* rootSaga() {
     yield  fork(loginFlow);
     yield  fork(registerFlow);
@@ -28,5 +28,7 @@ export default function* rootSaga() {
     yield fork(get_decision_flow);
     yield fork(add_decision_flow);
     yield fork(update_decision_flow);
-    yield fork(update_currentlist_flow)
+    yield fork(update_currentlist_flow);
+    yield fork(del_decision_flow);
+    
 }

@@ -12,6 +12,7 @@ export const actionTypes = {
     "UPDATE_DECISION":"UPDATE_DECISION",
     "ADD_DECISION":"ADD_DECISION",
     "UPDATE_CURRENTLIST":"UPDATE_CURRENTLIST",
+    "DEL_DECISION":"DEL_DECISION"
 }
 
 export const actions = {
@@ -25,7 +26,11 @@ export const actions = {
         type: actionTypes.UPDATE_DECISION,
         did,
         list,
-        i
+        // i
+    }),
+    del_decision:(did)=>({
+        type: actionTypes.DEL_DECISION,
+        did
     }),
     add_decision:(data)=>({
         type: actionTypes.ADD_DECISION,
@@ -49,16 +54,12 @@ export const decision = (state = initialState,action)=>{
             ...state,
             indexlist:state.indexlist.concat(action.data)
         };
-        case actionTypes.UPDATE_DECISION:
-        return{
-            ...state,
-            indexlist:list
-        };
         case actionTypes.UPDATE_CURRENTLIST:
         return{
             ...state,
             currentlist:action.data
         }
+
         default:
         return state;
     }

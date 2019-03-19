@@ -25,6 +25,7 @@ router.get('/getDecision',(req,res)=>{
 //添加小决定
 router.post('/addDecision',(req,res)=>{
     let {title,model,repeat,itemarr,userid} = req.body;
+    itemarr=itemarr.split(',');
     if(req.session.userInfo){
         let newDecision = new Decision({
             userid,
@@ -40,13 +41,13 @@ router.post('/addDecision',(req,res)=>{
         })
     }
     else{
-        responseClient(res,500,1,'刷你麻痹');
+        responseClient(res,500,1,'我真的不知道你在刷你🐎');
     }
 })
 //删除小决定
 router.get('/delDecision',(req,res)=>{
-   let {id} = req.body;
-   Decision.delete({'_id':id}).then(data=>{
+   let {did} = req.query;
+   Decision.remove({'_id':did}).then(data=>{
     responseClient(res, 200, 0, 'success', data);
    }).catch(
        err=>{
@@ -56,8 +57,10 @@ router.get('/delDecision',(req,res)=>{
 })
 //更改小决定
 router.post('/updDecision',(req,res)=>{
-    let {id,itemarr,title,repeat} = req.body;
-    Decision.updateOne({'_id':id}).then(data=>{
+    let {_id,itemarr,model,repeat,title,userid} = req.body;
+    itemarr=itemarr.split(',')
+    //list.itemarr=list.itemarr.split(',');
+    Decision.update({_id},{'title':title,'model':model,'repeat':repeat,'itemarr':itemarr}).then(data=>{
         responseClient(res, 200, 0, 'success', data);
     }).catch(err=>{
         responseClient(err);

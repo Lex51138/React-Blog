@@ -98,7 +98,7 @@ class AddChoice extends Component {
                 <div className='Index_Todo_Box'>
                     <div className='kzh_box'>
                         <p>客制化</p>
-                        <Link to="/小决定/create"><div className='Index_Item_Box'>&#xe68b;<span>创建新决定</span></div></Link>
+                        <Link to="/小决定/create/new"><div className='Index_Item_Box'>&#xe68b;<span>创建新决定</span></div></Link>
                     </div>
                     <div className="model_box">
                         <p>模板</p>

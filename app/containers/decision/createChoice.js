@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { emoji } from './Index'
 import { connect } from 'react-redux'
 import { actions as decisionActinos } from '../../reducers/decision'
-const { add_decision, update_currentlist,get_decision } = decisionActinos;
+const { add_decision, update_currentlist,get_decision,update_decision} = decisionActinos;
 import { model } from './components/addChoice'
 // import {addTodo} from './Todo'
 import './style.less';
@@ -50,23 +50,45 @@ class CreateChoice extends Component {
     }
     uploadChoice = _ => {
         let data = this.props.currentlist;
-        data.title = this.state != null ? this.state.title : data.title;
+        if(this.state != null){
+            if(this.state.title!=undefined){
+                data.title=this.state.title;
+            }
+        } 
         data.repeat = $(".Check")[0].checked ? 1 : 0;
         data.userid = this.props.userId;
-        this.props.add_decision(data);
+        if (this.props.match.params.model.length>3) {//判断是更改还是添加
+            this.props.update_decision(this.props.match.params.model,data);
+        }else{
+            this.props.add_decision(data);
+        }
+        setTimeout(_=>{window.location.href=`/小决定/${this.props.userId}`},1000);
     }
     render() {
         const goBack = () => {
             history.go(-1);
         }
-
+        let emo;
+        if(this.props.match.params.model=="new"){
+            emo = 6;
+        }else if(this.props.match.params.model.length>=4){
+            emo = this.props.currentlist.model;
+        }else{
+            emo = parseInt(this.props.match.params.model)
+        }
         return (
             <div>
                 <div className="Index_Head">
                     <a className='Index_Head_Return' onClick={goBack}>&#xe8b5;</a>
                     <a className="Index_Head_Add" onClick={this.uploadChoice.bind(this)}>&#xe625;</a>
                 </div>
-                <div className='Index_Item_Box create'><span className='create_span'>{emoji[parseInt(this.props.match.params.model)]}</span><input onChange={this.changeTitle.bind(this)} className='create_input' value={this.state != null ? this.state.title : this.props.currentlist.title} placeholder="問題" type="text" /></div>
+                <div className='Index_Item_Box create'>
+                <span className='create_span'>
+                {emoji[emo]}
+                </span>
+                <input onChange={this.changeTitle.bind(this)} className='create_input' 
+                value={this.state != null ? this.state.title : this.props.currentlist.title} placeholder="問題" type="text" />
+                </div>
                 <div className="Option_box">
                     {
                         this.props.match.params.model ?
@@ -91,19 +113,20 @@ class CreateChoice extends Component {
             </div>
         )
     }
-    componentDidMount() {
-        //   if(model[parseInt(this.props.match.params.model)].repeat){
-        //     $(".Check")[0].checked=true;
-        //   }
+    componentDidMount() {  
         let data;
         if (this.props.match.params.model.length>3) {//更改的data
             this.props.get_decision('',1,this.props.match.params.model);
         }
-        else{//选取模板或创建心决定的data
+        else{//选取模板或创建新决定的data
             data = model[parseInt(this.props.match.params.model)];
             this.props.update_currentlist(data);
-        }
-        
+        }  
+    }
+    componentWillUpdate(){
+        if(parseInt(this.props.currentlist.repeat)){
+            $(".Check")[0].checked=true;
+          }
     }
 }
 CreateChoice.defaultProps = {
@@ -120,9 +143,10 @@ CreateChoice.defaultProps = {
 function mapStateToProps(state) {
     let { userId } = state.globalState.userInfo;
     let currentlist = state.decision.currentlist;
+  
     return {
         userId,
-        currentlist
+        currentlist,
     }
 }
 
@@ -131,6 +155,7 @@ function mapDispatchToProps(dispatch) {
         get_decision:bindActionCreators(get_decision, dispatch),
         add_decision: bindActionCreators(add_decision, dispatch),
         update_currentlist: bindActionCreators(update_currentlist, dispatch),
+        update_decision:bindActionCreators(update_decision, dispatch),
     }
 }
 

@@ -4,15 +4,15 @@ import { bindActionCreators } from 'redux'
 
 import { Link } from 'react-router-dom'
 import { actions as decisionActinos } from '../../reducers/decision'
-const { get_decision } = decisionActinos
+const { get_decision,del_decision } = decisionActinos
 import './style.less';
 export const emoji = ["🍻","🍲","🎲","💴","❤","🎃","🤔",'🎁',"👨‍🎓","🏃‍","✈"];
 
-const Todo = ({item,editClick,delClick}) => (//小决定首页渲染决定组件
+const Todo = ({item,delClick}) => (//小决定首页渲染决定组件
     <div className='Index_Item_Box Index' id={item._id}>
         <div className="Index_Item">
         <Link to={''}><span>{emoji[item.model]}</span><span className='sp-Span'>{item.title}</span></Link>
-        <a className='del'>&#xe600;</a>
+        <a className='del' onClick={delClick}>&#xe600;</a>
        <Link to={`/小决定/create/${item._id}`}><a className='edit'>&#xe68b;</a></Link>
         </div>
     </div>
@@ -21,8 +21,16 @@ const Todo = ({item,editClick,delClick}) => (//小决定首页渲染决定组件
 class Index extends Component {
     constructor(props){
         super(props);
+        let userId = this.props.location.pathname;
+        userId = userId.replace('/小决定/','');
+        this.state={
+            userId
+        }
     }
-    
+    delClick = e=>{
+        this.props.del_decision(e.target.parentNode.parentNode.id);
+        setTimeout(_=>{this.props.get_decision(this.state.userId,0,'');},100);
+    }
     render() {
         const {indexlist} = this.props;
         const goBack= ()=>{
@@ -41,7 +49,7 @@ class Index extends Component {
                         indexlist.length == 0 ?
                             <div className='nothing'>点击右上角的+创建小决定吧</div>
                             : indexlist.map((item,key) => (
-                                <Todo item={item}/>
+                                <Todo item={item} delClick={this.delClick}/>
                             ))
                         }
                 </div>
@@ -49,9 +57,7 @@ class Index extends Component {
         )
     }
     componentDidMount(){
-        let userid = this.props.location.pathname;
-        userid = userid.replace('/小决定/','');
-        this.props.get_decision(userid,0,'');
+        this.props.get_decision(this.state.userId,0,'');
     }
 }
 
@@ -72,6 +78,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         get_decision: bindActionCreators(get_decision, dispatch),
+        del_decision: bindActionCreators(del_decision, dispatch),
     }
 }
 export default connect(
