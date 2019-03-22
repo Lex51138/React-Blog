@@ -1,7 +1,7 @@
 .container{
     display: flex;
     flex-direction: row;
-    height: 165px;
+    height: 196px;
     padding: 18px 10px;
     margin-bottom: 20px;
     background: #fff;
@@ -40,9 +40,9 @@
     left: 10px;
 }
 .container>div:first-child>img{
-    width: 83%;
+    width: 190px;
     background-size: 100% 100%;
-    height: 143px;
+    height: 156px;
 }
 
 .container>div:first-child{

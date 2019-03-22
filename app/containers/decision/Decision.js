@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import {
     BrowserRouter as Router,
     Route,
     Switch,
     Redirect
 } from 'react-router-dom'
-import NotFound from "../../";
+import TurnTable from './turnTable'
 import AddChoice from '././components/addChoice'
 import CreateChoice from './createChoice'
 import Index from './Index'
@@ -17,9 +16,10 @@ class Decision extends Component {
         return (
             <div className='Index_Box'>
                 <Switch>
+                <Route path='/小决定/turnTable/:did' component={TurnTable} />      
                 <Route path={'/小决定/add'} component={AddChoice} />
                 <Route path={'/小决定/create/:model'} component={CreateChoice} />
-                <Route path='/小决定/:idg' component={Index} />        
+                <Route path='/小决定/:id' component={Index} />    
                     {/* <Route component={NotFound}/> */}
                 </Switch>
              </div>

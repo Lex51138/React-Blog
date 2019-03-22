@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { Link } from 'react-router-dom'
 import { actions as decisionActinos } from '../../reducers/decision'
 const { get_decision,del_decision } = decisionActinos
@@ -11,7 +10,7 @@ export const emoji = ["🍻","🍲","🎲","💴","❤","🎃","🤔",'🎁',"�
 const Todo = ({item,delClick}) => (//小决定首页渲染决定组件
     <div className='Index_Item_Box Index' id={item._id}>
         <div className="Index_Item">
-        <Link to={''}><span>{emoji[item.model]}</span><span className='sp-Span'>{item.title}</span></Link>
+        <Link to={`/小决定/turnTable/${item._id}`}><span>{emoji[item.model]}</span><span className='sp-Span'>{item.title}</span></Link>
         <a className='del' onClick={delClick}>&#xe600;</a>
        <Link to={`/小决定/create/${item._id}`}><a className='edit'>&#xe68b;</a></Link>
         </div>

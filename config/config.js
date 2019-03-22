@@ -1,10 +1,10 @@
 module.exports = {
     host:process.env.HOST || 'localhost',
-    port:process.env.PORT ||(process.env.NODE_ENV === 'production'?80:7777),
+    port:process.env.PORT ||(process.env.NODE_ENV === 'production'?8080:7777),
     apiHost:process.env.APIHOST || 'localhost',
     apiPort:process.env.APIPORT || '8791',
-    dbHost:"loadlhost",
-    dbPort:"27017",
+    dbHost:"47.107.187.0",
+    dbPort:"37017",
     app:{
         title:"personal blog",
         description:'Lex\'s personal blog demo',
