@@ -12,22 +12,22 @@ const zhizhen = [
     {}, {'zhen': '-0'},
     {'zhen': '-12'},
     {'zhen': '1'},
-    {'zhen':'2.5'},
-    {'zhen':'1.5'},
-    {'zhen':'1.2'},
-    {'zhen':'1.25'},
-    {'zhen':'1.3'},
+    {'zhen':'0.97'},
+    {'zhen':'1.1'},
+    {'zhen':'1.15'},
+    {'zhen':'1.22'},
+    {'zhen':'1.23'},
     {'zhen':'1.35'},
-    {'zhen':'1.35'},
+    {'zhen':'1.28'},
     {'zhen':'1.35'}
 ]
 const TableScript = (itemarr,repeat) =>{
-     if(document.getElementById("can1")===null||itemarr.length==0)return;
+     if(document.getElementById("can1")===null||canvas>=1||itemarr.length==0)return;
         //运行canvas脚本
         var can1 = document.getElementById("can1");
         var ctx = can1.getContext("2d");
         // ctx.clearRect(0, 0, 1000,1000);
-       
+        canvas++
         var nums =   itemarr;
         var colors = ["#983335", "#77963f", "#5d437c", "#35859f"];
         var start = 0;
@@ -82,12 +82,10 @@ const TableScript = (itemarr,repeat) =>{
                 else{
                     ctx.font = "20px scans-serif";
                     ctx.fillStyle = "#000";
-                    ctx.fillText(nums[i], 117, 10);
-                    
+                    ctx.fillText(nums[i], 117, 10); 
                 }
                 end = int / 50 * Math.PI / 2;
                 angle += end + start +zhuan;
-                console.log(angle)
             }
         }
         function drawButton() {//绘制按钮，以及按钮上start的字
@@ -169,6 +167,7 @@ const TableScript = (itemarr,repeat) =>{
                         cancelAnimationFrame(req);
                         iszhuan = false;
                         clearInterval(slow);
+                        $(".Table_Title")[0].innerText=(result||'???');
                     }
                 },450)
             }, 1200);
@@ -190,7 +189,6 @@ const TableScript = (itemarr,repeat) =>{
         }
         render();
         canvas++;
-       
 }
 
 class TurnTable extends Component {
