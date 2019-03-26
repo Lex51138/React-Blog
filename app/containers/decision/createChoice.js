@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { emoji } from './Index'
 import { connect } from 'react-redux'
