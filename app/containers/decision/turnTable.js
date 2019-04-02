@@ -21,7 +21,7 @@ const zhizhen = [
     {'zhen':'1.28'},
     {'zhen':'1.35'}
 ]
-const TableScript = (itemarr,repeat) =>{
+const TableScript = (itemarr) =>{
      if(document.getElementById("can1")===null||canvas>=1||itemarr.length==0)return;
         //运行canvas脚本
         var can1 = document.getElementById("can1");
@@ -29,7 +29,7 @@ const TableScript = (itemarr,repeat) =>{
         // ctx.clearRect(0, 0, 1000,1000);
         canvas++
         var nums =   itemarr;
-        var colors = ["#983335", "#77963f", "#5d437c", "#35859f"];
+        var colors = ["#983335", "#77963f", "#5d437c", "#35859f","#983335","#35859f","#983345","#985335","#52437c","#983345","#779633","#35859d"];
         var start = 0;
         var int = 100/itemarr.length;
         var zhuan = 0;
@@ -47,7 +47,7 @@ const TableScript = (itemarr,repeat) =>{
                 ctx.moveTo(0, 0);
                 end += (int / 50 * Math.PI);//终止角度
                 ctx.strokeStyle = "white";
-                ctx.fillStyle = colors[parseInt(Math.random() * colors.length)];
+                ctx.fillStyle = colors[i];
                 ctx.arc(0, 0, 200, start, end);
                 ctx.fill();
                 ctx.closePath();
@@ -121,42 +121,15 @@ const TableScript = (itemarr,repeat) =>{
             ctx.fill();
             ctx.restore();
         }
-    function ranDom() {
-        // 循环N次生成随机数 
-        for (let i = 0; i<nums.length; i++) {
-            // 生成1随机数 
-            generateRandom(nums.length);
-        }
-    }
-    // 生成随机数的方法 
-    function generateRandom(count) {
-        var rand = nums[parseInt(Math.random() * count)];
-        for (let i = 0; i < repeatarr.length; i++) {
-            if (repeatarr[i] == rand) {
-                break;
-            }
-        }
-        repeatarr.push(rand);
-    } 
         can1.addEventListener('mousedown', e => {
             
             zhuan = 0.04
-            // if(repeatarr.length<=0){
-            //     alert('已经全部轮完了');
-            //     return;
-            // }
             if(iszhuan){
                 return;
             }
             else{
                 iszhuan = true;
                 req = window.requestAnimationFrame(zhuanquan);
-            }
-            if(repeat=="1"){//判断是否是不重复模式
-                ranDom()
-            }
-            else{
-                result = nums[Math.floor(Math.random()*nums.length)];
             }
             setTimeout(() => {
                 var speed = 0.01;
@@ -167,7 +140,6 @@ const TableScript = (itemarr,repeat) =>{
                         cancelAnimationFrame(req);
                         iszhuan = false;
                         clearInterval(slow);
-                        $(".Table_Title")[0].innerText=(result||'???');
                     }
                 },450)
             }, 1200);
@@ -199,15 +171,17 @@ class TurnTable extends Component {
         }
     }
     render() {
+        const goBack = () => {
+            history.go(-1);
+        }
         let {itemarr,repeat} = this.props.currentlist
         return (
             <div className='turnTable_Parent'>
                 <div className="Index_Head">
-                    <Link to="/小决定/add"><a className="Index_Head_Add">&#xe601;</a></Link>
+                    <a className='Index_Head_Return' onClick={goBack}>&#xe8b5;</a>
                 </div>
                 <div className='Table_Title_Box'>
                     <p>{this.props.currentlist.title}</p>
-                    <p className='Table_Title'>？？？</p>
                 </div>
                 <div className='Table_zhuan_Box'>
                     <canvas id="can1" width="426px" height="426px"></canvas>  
@@ -221,6 +195,9 @@ class TurnTable extends Component {
     }
     componentDidMount() {
         this.props.get_decision('',1,this.props.match.params.did);
+    }
+    componentWillMount(){
+        canvas = 0;
     }
 }
 TurnTable.defaultProps = {

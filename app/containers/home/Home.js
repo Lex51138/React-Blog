@@ -49,7 +49,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.props.get_article_list(this.props.match.params.tag || '')
+        this.props.get_article_list(this.props.match.params.tag || '');
+        $(".background")[0].style.backgroundColor="#f0f2f5";
     }
 }
 

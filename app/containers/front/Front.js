@@ -75,7 +75,7 @@ class Front extends Component{
             <Layout>
              <BackTop />
               <Menus userid = {this.props.userInfo.userId} getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
-            <Layout>
+            <Layout  className='background'>
              <Content>
                 <Row >
                 <Col xs={1} sm={1} md={1} lg={1} xl={3} xxl={5} />
@@ -132,6 +132,7 @@ class Front extends Component{
 
     componentDidMount() {
         this.props.get_all_tags();
+        
     }
     componentWillMount() { //在render前引用不然会报错
         //引入百度统计

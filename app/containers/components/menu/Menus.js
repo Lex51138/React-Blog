@@ -67,11 +67,13 @@ export default class Menus extends Component{
             current: e.key,
         });
         if(e.key === '小决定'){
+            if(this.props.userid==undefined){alert('此功能需要登陆账号');return}
             toPath='/'+e.key+'/'+this.props.userid
             this.props.history.push(toPath);
-            // this.props.history.push(toPath);
+        }else{
+            this.props.history.push(toPath);
         }
-        this.props.history.push(toPath);
+        
     };
 
     render(){

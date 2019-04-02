@@ -24,6 +24,11 @@ class Decision extends Component {
                 </Switch>
              </div>
         )
+        
     }
+    componentDidMount(){
+        // window.screen.width<=768?$(".ant-row")[2].style.backgroundColor="#fff":"";//手机显示将背景变白
+    }
+  
 }
 export default Decision;
