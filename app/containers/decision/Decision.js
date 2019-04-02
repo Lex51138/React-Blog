@@ -27,7 +27,7 @@ class Decision extends Component {
         
     }
     componentDidMount(){
-        // window.screen.width<=768?$(".ant-row")[2].style.backgroundColor="#fff":"";//手机显示将背景变白
+        window.screen.width<=768?$(".background")[0].style.backgroundColor="#fff":"";//手机显示将背景变白
     }
   
 }
