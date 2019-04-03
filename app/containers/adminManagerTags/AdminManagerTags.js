@@ -29,9 +29,9 @@ class AdminManagerTags extends Component{
         this.setState({ inputValue: e.target.value });
     };
 
-    handleInputConfirm = () => {
+    handleInputConfirm = (e) => {
         // 添加标签
-        this.props.addTag(this.state.inputValue);
+        this.props.addTag({'name':this.state.inputValue,'type':e.target.id});
         this.setState({
             inputVisible:  false,
             inputValue: '',
@@ -42,17 +42,22 @@ class AdminManagerTags extends Component{
     render(){
         const { inputVisible, inputValue } = this.state;
         const {tags} = this.props;
+        let data;
+        data = tags;
         return(
             <div>
                 <h2 className={style.titleStyle}>标签管理</h2>
-                {tags.map((tag, index) => {
+                {
+                    data.map((tag, index) => {
+                     if(tag.type=='main'){
                     const isLongTag = tag.length > 20;
                     const tagElem = (
-                        <Tag className={style.tagStyle} key={index} closable={index !== 0} afterClose={() => this.handleClose(tag)}>
-                            {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                        <Tag className={style.tagStyle} key={index} closable={index !== 0} afterClose={() => this.handleClose(tag.name)}>
+                            {isLongTag ? `${tag.slice(0, 20)}...` : tag.name}
                         </Tag>
                     );
-                    return isLongTag ? <Tooltip key={tag} title={tag}>{tagElem}</Tooltip> : tagElem;
+                    return isLongTag ? <Tooltip key={tag.name} title={tag.name}>{tagElem}</Tooltip> : tagElem;
+                     }
                 })}
                 {inputVisible && (
                     <Input
@@ -60,6 +65,35 @@ class AdminManagerTags extends Component{
                         ref={this.saveInputRef}
                         type="text"
                         size="small"
+                        style={{ width: 108 }}
+                        value={inputValue}
+                        id='main'
+                        onChange={this.handleInputChange}
+                        onBlur={this.handleInputConfirm}
+                        onPressEnter={this.handleInputConfirm}
+                    />
+                )}
+                {!inputVisible && <Button className={style.tagStyle} size="small" type="dashed" onClick={this.showInput}>+ New Tag</Button>}
+                <h2 className={style.titleStyle}>云标签管理</h2>
+
+                {data.map((tag, index) => {
+                    if(tag.type=='cloud'){
+                    const isLongTag = tag.length > 20;
+                    const tagElem = (
+                        <Tag className={style.tagStyle} key={index} closable={index !== 0} afterClose={() => this.handleClose(tag.name)}>
+                            {isLongTag ? `${tag.slice(0, 20)}...` : tag.name}
+                        </Tag>
+                    );
+                    return isLongTag ? <Tooltip key={tag.name} title={tag.name}>{tagElem}</Tooltip> : tagElem;
+                    }
+                })}
+                {inputVisible && (
+                    <Input
+                        className={style.tagStyle}
+                        ref={this.saveInputRef}
+                        type="text"
+                        size="small"
+                        id='cloud'
                         style={{ width: 108 }}
                         value={inputValue}
                         onChange={this.handleInputChange}
@@ -72,12 +106,10 @@ class AdminManagerTags extends Component{
             </div>
         )
     }
-
     componentDidMount() {
-        this.props.getAllTags();
+        this.props.getAllTags(1);
     }
 }
-
 function mapStateToProps(state) {
     return{
         tags:state.admin.tags

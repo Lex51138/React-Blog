@@ -12,6 +12,7 @@ import {bindActionCreators} from 'redux'
 import {actions as frontActions} from '../../reducers/frontReducer'
 const {get_article_list,get_article_detail} = frontActions;
 
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -20,18 +21,22 @@ class Home extends Component {
 
     render() {
         const {tags} = this.props;
+        const tagsItem = [];//将所有标签存储的数组
+        tags.map(result=>{
+            tagsItem.push(result.name||result);
+        })
         localStorage.setItem('userInfo', JSON.stringify(this.props.userInfo));
         return (
-            tags.length > 1 && this.props.match.params.tag && (tags.indexOf(this.props.match.params.tag) === -1 || this.props.location.pathname.lastIndexOf('\/') > 0)//判断URL是否有这个标签没有则重定向路由404
+            tagsItem.length > 1 && this.props.match.params.tag && (tagsItem.indexOf(this.props.match.params.tag) === -1 || this.props.location.pathname.lastIndexOf('\/') > 0)//判断URL是否有这个标签没有则重定向路由404
                 ?
-                // <Redirect to='/404'/>
-                ""
+                <Redirect to='/404'/>//如果url没有标签重定向至404页面
                 :
                 <div className={style.container}>
                     <ArticleList //渲染文章列表
                         history={this.props.history}
                         data={this.props.articleList}
                         getArticleDetail={this.props.get_article_detail}
+                        tagsItem={this.props.tags}
                     />
                     <QueueAnim className="Pagination" delay={1000}>
                     <div className={style.paginationContainer}>

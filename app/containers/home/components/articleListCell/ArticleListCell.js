@@ -1,7 +1,12 @@
 import React from 'react'
 import style from './style.css'
 import {Link} from 'react-router-dom'
-
+import { Tag } from 'antd';
+export const cloudTagColor = {
+    'React':'purple',
+    '记录':'blue',
+    'js':'gold'
+}
 export const ArticleListCell = (props)=>(
     <div className={`${style.container} `} onClick={()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}}>
         <div className={style.cover}>
@@ -11,6 +16,14 @@ export const ArticleListCell = (props)=>(
             <p className={style.title}>
                 {props.data.title}
             </p>
+            <span className={style.Cloud_Tags_Box}> {
+                props.cloudTags.map(result => (
+                    <a href={`/${result}`}>
+                    <Tag color={cloudTagColor[result]}>{result}</Tag>
+                    </a>
+                ))
+            }
+            </span>
             <p className={style.summary}>
                 {props.data.summary}
             </p>

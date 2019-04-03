@@ -138,7 +138,7 @@ class AdminNewArticle extends Component {
                     >
                         {
                             this.props.tagsBase.map((item) => (
-                                <Option key={item}>{item}</Option>
+                                <Option key={item.name}>{item.name}</Option>
                             ))
                         }
                     </Select>
@@ -196,7 +196,9 @@ AdminNewArticle.defaultProps = {
     title: '',
     content: '',
     tags: [],
-    tagsBase: []
+    tagsBase: [],
+    total:0,
+    tagsBase:[]
 };
 
 function mapStateToProps(state) {

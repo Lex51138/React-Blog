@@ -61,7 +61,7 @@ class Front extends Component{
     }
     render(){
         const {url} = this.props.match;
-        const {login, register} = this.props;
+        const {login, register,categories} = this.props;
         let hash,data; 
         if(this.props.userInfo.userId==''||this.props.userInfo.userId==undefined){}
         else{
@@ -108,7 +108,7 @@ class Front extends Component{
                         xxl={{ span: 6, offset: 1 }}
                     >
                     <div className={`${style.loginContainer}`}>
-                    <WidthMe total={total}/>
+                    <WidthMe total={total} tags={categories}/>
                             {this.props.userInfo.userId 
                             ?
                             <Logined history={this.props.history} 
@@ -131,7 +131,7 @@ class Front extends Component{
     }
 
     componentDidMount() {
-        this.props.get_all_tags();
+        this.props.get_all_tags(0);
         
     }
     componentWillMount() { //在render前引用不然会报错

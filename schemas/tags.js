@@ -4,5 +4,6 @@
 import mongoose from 'mongoose'
 
 module.exports = new mongoose.Schema({
-    name:String
+    name:String,
+    type:String
 });

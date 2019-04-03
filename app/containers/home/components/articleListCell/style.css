@@ -59,6 +59,10 @@
     justify-content: space-between;
     flex-direction: column;
 }
+.Cloud_Tags_Box{
+    position: relative;
+    top: -2px;
+}
 .title{
     line-height: 37px;
     display: block;

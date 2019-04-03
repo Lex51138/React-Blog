@@ -21,13 +21,14 @@ router.get('/delTag', function (req, res) {
 
 //添加标签
 router.post('/addTag', function (req, res) {
-    let {name} = req.body;
+    let {name,type} = req.body;
     Tags.findOne({
         name
     }).then(result => {
         if (!result) {
             let tag = new Tags({
-                name
+                name,
+                type
             });
             tag.save()
                 .then(data => {

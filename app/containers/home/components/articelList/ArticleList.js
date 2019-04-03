@@ -8,8 +8,9 @@ export default class ArticleList extends Component{
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
-
     render(){
+        let cloudTags  = [];
+        const {tagsItem} = this.props;
         return(
             <div>
                 <QueueAnim
@@ -18,9 +19,17 @@ export default class ArticleList extends Component{
                       { opacity: [1, 0], translateY: [0, -50] }
                     ]}>
                     {
-                        this.props.data.map((item,index)=>(
-                            <ArticleListCell getArticleDetail={this.props.getArticleDetail} history={this.props.history} key={index} data={item}/>
-                        ))
+                        this.props.data.map((item,index)=>{
+                            cloudTags = [];
+                            item.tags.map(result=>{
+                                for(let i = 0;i<tagsItem.length;i++){
+                                    if(tagsItem[i].name==result&&tagsItem[i].type=='cloud'){
+                                        cloudTags.push(result);
+                                    }
+                                }
+                            })
+                            return(<ArticleListCell getArticleDetail={this.props.getArticleDetail} history={this.props.history} key={index} data={item} cloudTags={cloudTags}/>)
+                        })
                     }
                 </QueueAnim>
             </div>

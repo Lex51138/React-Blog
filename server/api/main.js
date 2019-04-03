@@ -13,7 +13,7 @@ router.use('/user', require('./user'));
 
 //获取全部标签
 router.get('/getAllTags', function (req, res) {
-    Tags.find(null, 'name').then(data => {
+    Tags.find().then(data => {
         responseClient(res, 200, 0, '请求成功', data);
     }).catch(err => {
         responseClient(res);
@@ -41,7 +41,7 @@ router.get('/getArticles', function (req, res) {
     Article.count(searchCondition)
         .then(count => {
             responseData.total = count;
-            Article.find(searchCondition, '_id title isPublish author viewCount commentCount time coverImg summary total', {
+            Article.find(searchCondition, '_id title isPublish author viewCount commentCount time coverImg summary total tags', {
                 skip: skip,
                 limit: 5
             })

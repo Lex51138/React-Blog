@@ -28,7 +28,7 @@ app.use(session({
     store: new FileStore(),
     saveUninitialized: false,
     saveUninitialized:true,
-    cookie: {maxAge: 60 * 1000 * 30}//过期时间
+    cookie: {maxAge: 60 * 10000 * 30}//过期时间
 }));
 
 

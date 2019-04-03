@@ -2,7 +2,7 @@ import React,{Component,PropTypes} from 'react'
 import './style.less'
 import { Card, Tooltip ,Tag} from 'antd'
 import { Link } from 'react-router-dom'
-import {connect} from 'react-redux'
+import {cloudTagColor} from '../home/components/articleListCell/ArticleListCell'
 const { Meta } = Card
 
 export default class WidthMe extends Component{
@@ -72,6 +72,20 @@ export default class WidthMe extends Component{
             </Tooltip>
           </div>
         </div>
+      </Card>
+
+      <Card title="云标签" hoverable={true} className="card">
+            {
+              this.props.tags.map(result=>{
+                if(result.type=='cloud'){
+                  return (
+                    <a href={`/${result.name}`}>
+                      <Tag color={cloudTagColor[result.name]}>{result.name}</Tag>
+                    </a>
+                  )
+                }
+              })
+            }
       </Card>
         </div>   
      ) 

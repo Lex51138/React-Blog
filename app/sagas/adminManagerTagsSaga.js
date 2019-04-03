@@ -14,10 +14,10 @@ export function* getAllTags() {
     }
 }
 
-export function* addTag(name) {
+export function* addTag(name,type) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
-        return yield call(post, '/admin/tags/addTag', {name});
+        return yield call(post, '/admin/tags/addTag', {name,type});
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -38,14 +38,19 @@ export function* delTag(name) {
 
 export function* getAllTagsFlow() {
     while (true) {
-        yield take(ManagerTagsTypes.GET_ALL_TAGS);
+        let req = yield take(ManagerTagsTypes.GET_ALL_TAGS);
         let res = yield call(getAllTags);
         if (res.code === 0) {
-            let tempArr = [];
-            for (let i = 0; i < res.data.length; i++) {
-                tempArr.push(res.data[i].name)
+            // let tempArr = [];
+            // for (let i = 0; i < res.data.length; i++) {
+            //     tempArr.push(res.data[i].name)
+            // }
+            if(req.admin==0){
+                yield put({type: ManagerTagsTypes.SET_TAGS, data: res.data});    
+            }else{
+                yield put({type: ManagerTagsTypes.ADMIN_SET_TAGS, data: res.data});    
             }
-            yield put({type: ManagerTagsTypes.SET_TAGS, data: tempArr});
+            
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
             setTimeout(function () {
@@ -78,7 +83,11 @@ export function* delTagFlow() {
 export function* addTagFlow() {
     while (true) {
         let req = yield take(ManagerTagsTypes.ADD_TAG);
-        let res = yield call(addTag, req.name);
+        if(req.data.name==''){
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '不能为空', msgType: 0});
+            return
+        }
+        let res = yield call(addTag, req.data.name,req.data.type);
         if (res.code === 0) {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
             yield put({type:ManagerTagsTypes.GET_ALL_TAGS});

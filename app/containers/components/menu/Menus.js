@@ -86,9 +86,11 @@ export default class Menus extends Component{
         >
             {
                 this.props.categories.map((item,index)=>(
-                    <Menu.Item key={item}>
-                        {item}
+                    item.type=='cloud'?"":(
+                    <Menu.Item key={item.name||item}>
+                        {item.name||item}
                     </Menu.Item>
+                    )
                 ))
             }
         </Menu>
