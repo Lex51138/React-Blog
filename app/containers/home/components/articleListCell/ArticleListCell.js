@@ -10,7 +10,7 @@ export const cloudTagColor = {
 export const ArticleListCell = (props)=>(
     <div className={`${style.container} `} onClick={()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}}>
         <div className={style.cover}>
-            <img src={props.data.coverImg} alt=""/>
+            <img className="cover_Img" src={props.data.coverImg} alt=""/>
         </div>
         <div className={style.bottomContainer}>
             <p className={style.title}>
@@ -42,7 +42,7 @@ export const ArticleListCell = (props)=>(
                         {props.data.commentCount}
                     </span>
                 </p>
-                <span className={style.lastSpan}>
+                <span className={style.lastSpan+' lastspan'}>
                     阅读全文<span> >></span>
                 </span>
             </div>
