@@ -8,7 +8,7 @@ export const cloudTagColor = {
     'js':'gold'
 }
 export const ArticleListCell = (props)=>(
-    <div className={`${style.container} `} onClick={()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}}>
+    <div className={`${style.container} `}onClick = {(document.body.clientWidth<600?()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}:"")} >
         <div className={style.cover}>
             <img className="cover_Img" src={props.data.coverImg} alt=""/>
         </div>
@@ -42,8 +42,9 @@ export const ArticleListCell = (props)=>(
                         {props.data.commentCount}
                     </span>
                 </p>
-                <span className={style.lastSpan+' lastspan'}>
-                    阅读全文<span> >></span>
+                <span onClick={()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}} 
+                    className={style.lastSpan+' lastspan'}>
+                    READ MORE<span> &#xe604;</span>
                 </span>
             </div>
         </div>

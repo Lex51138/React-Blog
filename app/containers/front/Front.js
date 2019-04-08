@@ -20,7 +20,7 @@ import WidthMe from "../widthMe/WidthMe"
 import {actions as IndexActions} from '../../reducers/index'
 import Identicon from 'identicon.js';
 const {get_all_tags} = actions;
-const {get_article_list,update_user_avatar} = FrontActinos;
+const {get_article_list,update_user_avatar,get_search_article} = FrontActinos;
 const {Content} = Layout
 var $ = require('jquery');
 window.$ = $;
@@ -74,7 +74,14 @@ class Front extends Component{
         return(
             <Layout>
              <BackTop />
-              <Menus userid = {this.props.userInfo.userId} getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
+              <Menus 
+              userid={this.props.userInfo.userId} 
+              getArticleList={(tag)=>this.props.get_article_list(tag,1)} 
+              categories={this.props.categories} 
+              history={this.props.history}
+              search={this.props.get_search_article}
+              pageNum={this.props.pageNum}
+              />
             <Layout  className='background'>
              <Content>
                 <Row >
@@ -148,7 +155,8 @@ class Front extends Component{
 
 Front.defaultProps = {
     categories:[],
-    userInfo:""
+    userInfo:"",
+    pageNum:1
 };
 
 Front.propTypes = {
@@ -159,7 +167,8 @@ function mapStateToProps(state) {
     return{
         categories:state.admin.tags,
         userInfo: state.globalState.userInfo,
-        total:state.front.articleList
+        total:state.front.articleList,
+        pageNum:state.front.pageNum
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -169,7 +178,8 @@ function mapDispatchToProps(dispatch) {
         login: bindActionCreators(IndexActions.get_login, dispatch),
         register: bindActionCreators(IndexActions.get_register, dispatch),
         login_out:bindActionCreators(IndexActions.login_out,dispatch),
-        update_avatar:bindActionCreators(update_user_avatar,dispatch)
+        update_avatar:bindActionCreators(update_user_avatar,dispatch),
+        get_search_article:bindActionCreators(get_search_article,dispatch)
     }
 }
 export default connect(

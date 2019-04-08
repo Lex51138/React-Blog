@@ -19,7 +19,21 @@ router.get('/getAllTags', function (req, res) {
         responseClient(res);
     })
 });
-
+//搜索文章
+router.get('/searchArticles',function(req,res){
+    let responseData = {};
+    let keys = "/"+req.query.key+"/" || null;
+    let skip = (req.query.pageNum - 1) < 0 ? 0 : (req.query.pageNum - 1) * 5;
+    Article.find({'title':{ $regex: '.*' + req.query.key + '.*' }}, '_id title isPublish author viewCount commentCount time coverImg summary total tags', {
+        skip: skip,
+        limit: 5
+    }).then(result=>{
+        responseData.list = result;
+        responseClient(res, 200, 0, 'success', responseData);
+    }).cancel(err => {
+        responseClient(res);
+    })
+})
 //获取文章
 router.get('/getArticles', function (req, res) {
     let tag = req.query.tag || null;

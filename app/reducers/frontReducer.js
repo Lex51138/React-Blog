@@ -11,6 +11,7 @@ export const actionTypes = {
     GET_ARTICLE_DETAIL: "GET_ARTICLE_DETAIL",
     RESPONSE_ARTICLE_DETAIL: "RESPONSE_ARTICLE_DETAIL",
     UPDATE_USER_AVATAR:"UPDATE_USER_AVATAR",
+    GET_SEARCH_ARTICLE:"GET_SEARCH_ARTICLE"
 };
 
 export const actions = {
@@ -32,6 +33,13 @@ export const actions = {
             type :actionTypes.UPDATE_USER_AVATAR,
             avatar,
             uid
+        }
+    },
+    get_search_article:(key,pageNum)=>{
+        return{
+            type :actionTypes.GET_SEARCH_ARTICLE,
+            key,
+            pageNum
         }
     }
 };

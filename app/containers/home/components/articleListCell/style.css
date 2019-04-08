@@ -1,3 +1,12 @@
+/* 箭头右滑hover动画 */
+@keyframes spanHover {
+    from {
+     left: 0px;
+    }
+    to {
+        left: 45px;
+    }
+}
 .container{
        display: flex;
     flex-direction: row;
@@ -5,11 +14,10 @@
     padding: 18px 10px;
     margin-bottom: 20px;
     background: #fff;
-    cursor: pointer;
     border-radius: 2px;
     opacity: 0;
     transition: all 0.4s;
-    
+    overflow: hidden;
 }
 .cover{
     display:block;
@@ -38,14 +46,10 @@
 }
 /* 头像 变大hover*/
 .container:hover div:first-child>img{
-    transform: scale(1.1)
+    transform: scale(1.14);
     /* display:none; */
 }
 
-/* span右滑hover */
-.container:hover .lastSpan>span{
-    transform: translate(12px, 0);
-}
 .container:hover>span{
     left: 10px;
 }
@@ -117,15 +121,25 @@
 }
 .lastSpan{
     color: #108ee9;
-    margin-top: 16px;
+    margin-top: 18px;
     font-weight: 600;
+    padding-left: 9px;
+    transition: 0.3s;
+    cursor: pointer;
     overflow: hidden;
 }
-
+.lastSpan:hover{
+    background: #ededed;
+}
+.lastSpan:hover span{
+    animation:spanHover 0.8s infinite;
+}
 .lastSpan>span{
-    font-size: 12px;
+    font-size: 20px;
+    transition: 0.4s;
     position: relative;
-    transition: all 0.3s;
+    top: 2px;
+    font-family: iconfont;
 }
 .cover_Img{
     width: 190px;

@@ -82,3 +82,32 @@ export function* updateUserAvatar(uid,avatar){
         yield put({type: IndexActionTypes.FETCH_END})
     }
 }
+
+
+export function* searchArticleFlow (){
+    while(true){
+        let req = yield take(FrontActionTypes.GET_SEARCH_ARTICLE);
+        let res = yield call(searchArticle,req.key,req.pageNum);
+        if(res){
+         if(res.code==0){
+            res.data.pageNum = req.pageNum;
+                yield put({type: FrontActionTypes.RESPONSE_ARTICLE_LIST,data:res.data});
+         }
+            else{
+                yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
+        }
+        }
+    }
+}
+export function* searchArticle (key,pageNum){
+    yield put({type: IndexActionTypes.FETCH_START})
+    try{
+        return yield call(get, `/searchArticles?key=${key}&pageNum=${pageNum}`);
+    }
+    catch(err){
+        yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
+    }
+    finally{
+        yield put({type: IndexActionTypes.FETCH_END})
+    }
+}
