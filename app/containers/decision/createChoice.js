@@ -120,7 +120,8 @@ class CreateChoice extends Component {
         else{//选取模板或创建新决定的data
             data = model[parseInt(this.props.match.params.model)];
             this.props.update_currentlist(data);
-        }  
+        } 
+        document.documentElement.scrollTop = 0;//回到顶部 
     }
     componentWillUpdate(){
         if(parseInt(this.props.currentlist.repeat)){

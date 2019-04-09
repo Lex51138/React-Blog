@@ -54,6 +54,7 @@ class Detail extends Component{
 
     componentDidMount() {
         this.props.get_article_detail(this.props.location.state.id);
+        document.documentElement.scrollTop = 0;//回到顶部
     }
 }
 function mapStateToProps(state) {

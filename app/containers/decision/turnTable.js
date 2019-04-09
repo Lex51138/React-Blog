@@ -195,6 +195,7 @@ class TurnTable extends Component {
     }
     componentDidMount() {
         this.props.get_decision('',1,this.props.match.params.did);
+        document.documentElement.scrollTop = 0;//回到顶部
     }
     componentWillMount(){
         canvas = 0;
