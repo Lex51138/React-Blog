@@ -187,5 +187,4 @@ export default class Menus extends Component {
             current: this.props.history.location.pathname.replace('\/', '') || '首页'
         })
     }
-
 }

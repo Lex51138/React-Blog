@@ -78,7 +78,6 @@ class Reply extends Component{
       const submitting = this.props.submitting;
       this.props.userinfo.username==undefined?(loging=true,initvalue="请先登录账号再评论哦~"):(loging=false,initvalue="可以嘴臭作者哦~") //判断是否登陆 没登录不给发言
         return(
-        
             <div id="Reply_Box">
             <Comment
             avatar={(
@@ -100,7 +99,7 @@ class Reply extends Component{
           />
             <ReplyList submitting={submitting} replylist={this.props.replylist}/>
             </div>
-            )
+          )
         
     }
     componentDidMount() {

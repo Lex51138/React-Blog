@@ -31,7 +31,8 @@ router.post('/addArticle', function (req, res) {
         coverImg:fmimg,
         summary,
         tags:tags.split(','),
-        total:total
+        total:total,
+        Topping:0,
     });
     tempArticle.save().then(data=>{
         responseClient(res,200,0,'保存成功',data)

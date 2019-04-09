@@ -47,9 +47,18 @@
   font-size: 15px;
 }
 .content pre {
-  background: #e9e9e9;
-  margin: 10px 0;
-  overflow: scroll;
+  position: relative;
+  border-left: 10px solid #358ccb;
+  box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+  background-color: #fdfdfd;
+  background-image: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+  background-size: 3em 3em;
+  background-origin: content-box;
+  background-attachment: local;
+  padding-left: 10px !important;
+}
+.content pre >code{
+  font-size: 0.8rem;
 }
 .detail_title{
   font-size: 1.6em;

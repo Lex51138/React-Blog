@@ -1,5 +1,5 @@
 import {
-    Comment, Icon, Tooltip, Avatar,
+    Comment, Tag, Avatar,
   } from 'antd';
   import React,{Component} from 'react'
   import Identicon from 'identicon.js';
@@ -33,7 +33,9 @@ import {
       return(
         <Comment
         actions={[<a className={style.Reply}  name = {datalist.username} id = {parentid} onClick={this.replyUser.bind(this)}>回复 </a>]}
-        author={<div><a>{datalist.username}</a><span>{moment(datalist.time).fromNow()}</span></div>}
+        author={<div><a>{datalist.username}</a>
+        {datalist.username=='Lex'?(<Tag style={{"margin-left":"6px"}} color='#108ee9'>站长</Tag>):""}
+        <span>{moment(datalist.time).fromNow()}</span></div>}
         avatar={(
           <Avatar
             src={avatar}
@@ -47,7 +49,6 @@ import {
       )
     }
   }
-
   class ReplyList extends Component{
     constructor(props){
         super(props);

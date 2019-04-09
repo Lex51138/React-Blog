@@ -1,13 +1,15 @@
 import React,{Component} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
-import remark from 'remark'
 import {connect} from 'react-redux'
 import {actions} from "../../reducers/frontReducer";
 const {get_article_detail} = actions;
-import reactRenderer from 'remark-react'
 import Reply from'./components/reply/Reply'
 import style from './style.css'
+import marked from 'marked'
+marked.setOptions({
+    highlight: code => hljs.highlightAuto(code).value,
+  });
 
 const ReplyLength = ({total})=>(
     <p className={style.Reply_Length}>{`${total} 条评论`}</p>
@@ -20,6 +22,7 @@ class Detail extends Component{
 
     render(){
         const {articleContent,title,author,viewCount,commentCount,time} = this.props;
+        const output = marked(articleContent||"正在拼命加载文章中..............");
         return(
             <div>
             <div className={style.container}>
@@ -38,8 +41,9 @@ class Detail extends Component{
                         <img src={require('./views.png')}/> {viewCount}
                     </span>
                 </div>
-                <div id='preview' className={style.content}>
-                    {remark().use(reactRenderer).processSync(articleContent).contents}
+                <div id='preview' className={style.content}  dangerouslySetInnerHTML={{ __html: output }}>
+                
+                        {/* {remark().use(reactRenderer).processSync(articleContent).contents} */}
                 </div>
             </div>
             <ReplyLength total={this.props.commentCount}/>
@@ -52,7 +56,6 @@ class Detail extends Component{
         this.props.get_article_detail(this.props.location.state.id);
     }
 }
-
 function mapStateToProps(state) {
     const {content,title,author,viewCount,commentCount,time} = state.front.articleDetail;
     return{

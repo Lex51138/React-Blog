@@ -55,11 +55,10 @@ router.get('/getArticles', function (req, res) {
     Article.count(searchCondition)
         .then(count => {
             responseData.total = count;
-            Article.find(searchCondition, '_id title isPublish author viewCount commentCount time coverImg summary total tags', {
+            Article.find(searchCondition, '_id title Topping isPublish author viewCount commentCount time coverImg summary total tags', {
                 skip: skip,
                 limit: 5
-            })
-                .then(result => {
+            }).sort({Topping:-1,time:-1}).then(result => {
                     responseData.list = result;
                     responseClient(res, 200, 0, 'success', responseData);
                 }).cancel(err => {

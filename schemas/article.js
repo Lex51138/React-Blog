@@ -15,5 +15,6 @@ module.exports = new mongoose.Schema({
     tags:Array,//标签
     isPublish:Boolean,//是否发布
     summary:String,//摘要
-    total:Number
+    total:Number,//文章总数
+    Topping:Number,//是否显示为置顶
 });
