@@ -1,6 +1,7 @@
 import Express from 'express'
 import Tags from '../../models/tags'
 import Article from '../../models/article'
+import Access from '../../models/access'
 import {responseClient} from '../util'
 
 const router = Express.Router();
@@ -13,6 +14,16 @@ router.use('/user', require('./user'));
 
 //获取全部标签
 router.get('/getAllTags', function (req, res) {
+    Access.findOne({ip:req.ip}).then(result=>{
+        if(result.id){}
+        else{
+            let newAccess = new Access({
+                ip:req.ip,
+                artlist:[],
+            })
+            newAccess.save().then(result=>{});
+        }
+    })
     Tags.find().then(data => {
         responseClient(res, 200, 0, '请求成功', data);
     }).catch(err => {
@@ -73,19 +84,42 @@ router.get('/getArticleDetail', (req, res) => {
     let _id = req.query.id;
    Article.findOne({_id})
        .then(data=>{
-           data.viewCount = data.viewCount+1;
-           Article.update({_id},{viewCount:data.viewCount})
-               .then(result=>{
-                   responseClient(res,200,0,'success',data);
-               }).cancel(err=>{
-                   throw err;
-           })
-
+        Access.findOne({ip:req.ip}).then(result=>{
+            if(result.artlist.length==0){//如果访问数组为空 就直接添加并更改
+                result.artlist.push(_id);
+                const resultArr = result.artlist;
+                Access.update({ip:req.ip},{artlist:resultArr}).then();
+                data.viewCount = data.viewCount+1;
+            }
+            else{
+                if(result.artlist.indexOf(_id)==-1){
+                    result.artlist.push(_id);
+                    const resultArr = result.artlist;
+                    data.viewCount = data.viewCount+1;
+                    Access.update({ip:req.ip},{artlist:resultArr}).then();
+                }
+                else{
+                    data.viewCount = data.viewCount;
+                }
+            }
+        }).finally(_=>{
+            Article.update({_id},{viewCount:data.viewCount})
+            .then(result=>{
+                responseClient(res,200,0,'success',data);
+            }).cancel(err=>{
+                throw err;
+            })
+        })
        }).cancel(err => {
        responseClient(res);
    });
 });
-
+//获取访问记录
+router.get('/getAccess', (req, res) => {
+    Access.find().then(result=>{
+        responseClient(res,200,0,'success',result);
+    })
+})
 module.exports = router;
 
 

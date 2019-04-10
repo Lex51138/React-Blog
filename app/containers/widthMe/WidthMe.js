@@ -3,11 +3,16 @@ import './style.less'
 import { Card, Tooltip ,Tag} from 'antd'
 import { Link } from 'react-router-dom'
 import {cloudTagColor} from '../home/components/articleListCell/ArticleListCell'
+import axios from 'axios'
 const { Meta } = Card
+
 
 export default class WidthMe extends Component{
   constructor(props){
       super(props);
+      this.state={
+        accessTotal:10
+      }
   }
   render(){
      return(
@@ -30,7 +35,7 @@ export default class WidthMe extends Component{
                   <p className="abstract">
                     <span>文章 - {this.props.total}</span>
                     <span style={{ marginRight: 10, marginLeft: 10 }}>|</span>
-                    <span>访问 - 0</span>
+                    <span>访问 - {this.state.accessTotal}</span>
                   </p>
                 </div>
               }
@@ -89,5 +94,11 @@ export default class WidthMe extends Component{
       </Card>
         </div>   
      ) 
+  }
+  componentDidMount(){
+      const Total = this.state.accessTotal
+      axios.get('/api/getAccess').then(result=>{//获取访问总数
+        this.setState({accessTotal:Total+result.data.length});
+      })
   }
 }
