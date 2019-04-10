@@ -14,10 +14,11 @@ router.use('/user', require('./user'));
 
 //获取全部标签
 router.get('/getAllTags', function (req, res) {
-    Access.findOne({ip:req.ip}).then(result=>{
+    var clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    Access.findOne({ip:clientIp}).then(result=>{
         if(result==null){
             let newAccess = new Access({
-                ip:req.ip,
+                ip:clientIp,
                 artlist:[],
             })
             newAccess.save().then(result=>{});

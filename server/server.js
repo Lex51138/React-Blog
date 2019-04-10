@@ -65,7 +65,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 //监听挂起
-app.listen(port, (err) => {
+app.listen(port,'0.0.0.0', (err) => {
     if (err) {
         console.error(err)
     } else {
