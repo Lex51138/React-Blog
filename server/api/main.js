@@ -15,8 +15,7 @@ router.use('/user', require('./user'));
 //获取全部标签
 router.get('/getAllTags', function (req, res) {
     Access.findOne({ip:req.ip}).then(result=>{
-        if(result.id){}
-        else{
+        if(result==null){
             let newAccess = new Access({
                 ip:req.ip,
                 artlist:[],

@@ -6,7 +6,16 @@ import {cloudTagColor} from '../home/components/articleListCell/ArticleListCell'
 import axios from 'axios'
 const { Meta } = Card
 
-
+const frinedLinks =[
+  {
+    name:'kangna',
+    link:'https://kangna.moe/'
+  },
+  {
+    name:'Garry',
+    link:'https://garry.fun'
+  }
+]
 export default class WidthMe extends Component{
   constructor(props){
       super(props);
@@ -78,17 +87,27 @@ export default class WidthMe extends Component{
           </div>
         </div>
       </Card>
-
       <Card title="云标签" hoverable={true} className="card">
             {
               this.props.tags.map(result=>{
                 if(result.type=='cloud'){
                   return (
-                    <a href={`/${result.name}`}>
+                    <a href={`${result.name}`}>
                       <Tag color={cloudTagColor[result.name]}>{result.name}</Tag>
                     </a>
                   )
                 }
+              })
+            }
+      </Card>
+      <Card title="友链🔗" hoverable={true} className="card">
+            {
+              frinedLinks.map(result=>{
+                  return (
+                    <a href={`/${result.link}`}>
+                      <Tag color={cloudTagColor[result.name]}>{result.name}</Tag>
+                    </a>
+                  )
               })
             }
       </Card>
