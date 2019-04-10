@@ -100,7 +100,7 @@ export default class WidthMe extends Component{
               })
             }
       </Card>
-      <Card title="友链🔗" hoverable={true} className="card">
+      <Card title="友情链接 🔗" hoverable={true} className="card">
             {
               frinedLinks.map(result=>{
                   return (

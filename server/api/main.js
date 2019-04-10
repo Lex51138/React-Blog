@@ -3,7 +3,6 @@ import Tags from '../../models/tags'
 import Article from '../../models/article'
 import Access from '../../models/access'
 import {responseClient} from '../util'
-
 const router = Express.Router();
 
 router.use('/decision', require('./decision'));
@@ -81,14 +80,15 @@ router.get('/getArticles', function (req, res) {
 });
 //获取文章详情
 router.get('/getArticleDetail', (req, res) => {
+    var clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     let _id = req.query.id;
    Article.findOne({_id})
        .then(data=>{
-        Access.findOne({ip:req.ip}).then(result=>{
+        Access.findOne({ip:clientIp}).then(result=>{
             if(result.artlist.length==0){//如果访问数组为空 就直接添加并更改
                 result.artlist.push(_id);
                 const resultArr = result.artlist;
-                Access.update({ip:req.ip},{artlist:resultArr}).then();
+                Access.update({ip:clientIp},{artlist:resultArr}).then();
                 data.viewCount = data.viewCount+1;
             }
             else{
@@ -96,7 +96,7 @@ router.get('/getArticleDetail', (req, res) => {
                     result.artlist.push(_id);
                     const resultArr = result.artlist;
                     data.viewCount = data.viewCount+1;
-                    Access.update({ip:req.ip},{artlist:resultArr}).then();
+                    Access.update({ip:clientIp},{artlist:resultArr}).then();
                 }
                 else{
                     data.viewCount = data.viewCount;
