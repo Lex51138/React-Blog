@@ -7,6 +7,7 @@ const {get_article_detail} = actions;
 import Reply from'./components/reply/Reply'
 import style from './style.css'
 import marked from 'marked'
+const ReactMarkdown = require('react-markdown')
 marked.setOptions({
     highlight: code => hljs.highlightAuto(code).value,
   });
@@ -22,7 +23,7 @@ class Detail extends Component{
 
     render(){
         const {articleContent,title,author,viewCount,commentCount,time} = this.props;
-        const output = marked(articleContent||"正在拼命加载文章中..............");
+        const output = articleContent||"正在拼命加载文章中..............";
         return(
             <div>
             <div className={style.container}>
@@ -41,8 +42,8 @@ class Detail extends Component{
                         <img src={require('./views.png')}/> {viewCount}
                     </span>
                 </div>
-                <div id='preview' className={style.content}  dangerouslySetInnerHTML={{ __html: output }}>
-                
+                <div id='preview' className={style.content} >
+                <ReactMarkdown source={output} />
                         {/* {remark().use(reactRenderer).processSync(articleContent).contents} */}
                 </div>
             </div>

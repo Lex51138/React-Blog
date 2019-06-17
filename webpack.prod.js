@@ -6,12 +6,14 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ROOT_PATH = pathLib.resolve(__dirname);
 const ENTRY_PATH = pathLib.resolve(ROOT_PATH, 'app');
 const OUTPUT_PATH = pathLib.resolve(ROOT_PATH, 'build');
 console.log(pathLib.resolve(ENTRY_PATH, 'index.js'));
 
 module.exports = {
+    mode:"production", 
     entry: {
         index: ['babel-polyfill', pathLib.resolve(ENTRY_PATH, 'index.js')],
         vendor: ['react', 'react-dom', 'react-router-dom', 'react-router']
@@ -121,7 +123,8 @@ module.exports = {
             ),
             threshold: 10240,
             minRatio: 0.8
-        })
+        }),
+        new ExtractTextPlugin("styles.css")
     ],
     resolve: {
         extensions: ['.js', '.json', '.sass', '.scss', '.less', 'jsx']

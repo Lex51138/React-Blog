@@ -89,10 +89,10 @@ export default class WidthMe extends Component{
       </Card>
       <Card title="云标签" hoverable={true} className="card">
             {
-              this.props.tags.map(result=>{
+              this.props.tags.map((result,index)=>{
                 if(result.type=='cloud'){
                   return (
-                    <a href={`${result.name}`}>
+                    <a key={index} href={`${result.name}`}>
                       <Tag color={cloudTagColor[result.name]}>{result.name}</Tag>
                     </a>
                   )
@@ -102,9 +102,9 @@ export default class WidthMe extends Component{
       </Card>
       <Card title="友情链接 🔗" hoverable={true} className="card">
             {
-              frinedLinks.map(result=>{
+              frinedLinks.map((result,index)=>{
                   return (
-                    <a href={`/${result.link}`}>
+                    <a key={index} href={`/${result.link}`}>
                       <Tag color={cloudTagColor[result.name]}>{result.name}</Tag>
                     </a>
                   )

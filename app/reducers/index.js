@@ -46,7 +46,7 @@ export const actions = {
         return {
             type: actionsTypes.SET_MESSAGE,
             msgType: 1,
-            msgContent: ''
+            msgContent: '',
         }
     },
     user_auth:function () {

@@ -7,6 +7,7 @@ export const cloudTagColor = {
     '记录':'blue',
     'js':'gold',
     '置顶':'#f50',
+    'Vue':'green',
 }
 export const ArticleListCell = (props)=>(
     <div className={`${style.container} `}onClick = {(document.body.clientWidth<600?()=>{props.history.push(`/detail/${props.data._id}`,{id:props.data._id});props.getArticleDetail(props.data._id)}:"")} >
@@ -19,8 +20,8 @@ export const ArticleListCell = (props)=>(
                 {props.data.Topping==1?( <Tag style= {{"margin-left":"10px"}} color={cloudTagColor['置顶']}>置顶</Tag>):""}
             </p>
             <span className={style.Cloud_Tags_Box}> {
-                props.cloudTags.map(result => (
-                    <a href={`/${result}`}>
+                props.cloudTags.map((result,index) => (
+                    <a key={index} href={`/${result}`}>
                     <Tag color={cloudTagColor[result]}>{result}</Tag>
                     </a>
                 ))

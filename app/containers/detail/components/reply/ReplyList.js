@@ -59,10 +59,10 @@ import {
         <div>
         {
           replylist.map((items,keys) => (
-            <ExampleComment datalist={items} parentid={items._id}>
+            <ExampleComment key={keys} datalist={items} parentid={items._id}>
             {
               replylist[keys].childReplyList.map((item,keys)=>(
-                <ExampleComment datalist={item} parentid={items._id}/>
+                <ExampleComment key={keys} datalist={item} parentid={items._id}/>
               ))
             }
             </ExampleComment>

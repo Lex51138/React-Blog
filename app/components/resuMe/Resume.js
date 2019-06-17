@@ -50,7 +50,7 @@ class Resume extends React.Component {
         const menu = ( //右侧简历菜单
             <Menu>
               {this.pageList.map((item, index) => (
-                <Menu.Item key={item.color} onClick={() => this.dotClick(index)}>
+                <Menu.Item key={index} onClick={() => this.dotClick(index)}>
                   <div>{item.title}</div>
                 </Menu.Item>
               ))}

@@ -28,7 +28,7 @@ export default class ArticleList extends Component{
                                     }
                                 }
                             })
-                            return(<ArticleListCell getArticleDetail={this.props.getArticleDetail} history={this.props.history} key={index} data={item} cloudTags={cloudTags}/>)
+                            return(<ArticleListCell key={index} getArticleDetail={this.props.getArticleDetail} history={this.props.history} key={index} data={item} cloudTags={cloudTags}/>)
                         })
                     }
                 </QueueAnim>

@@ -49,7 +49,7 @@ class Index extends Component {
                         indexlist.length == 0 ?
                             <div className='nothing'>点击右上角的+创建小决定吧</div>
                             : indexlist.map((item, key) => (
-                                <Todo item={item} delClick={this.delClick} />
+                                <Todo key={key} item={item} delClick={this.delClick} />
                             ))
                     }
                 </div>

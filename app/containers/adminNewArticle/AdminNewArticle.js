@@ -3,18 +3,17 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import style from './style.css'
-import remark from 'remark'
-import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
 import {actions} from "../../reducers/adminManagerNewArticle";
 import {actions as tagActions} from "../../reducers/adminManagerTags";
 import dateFormat from 'dateformat'
-
+const ReactMarkdown = require('react-markdown')
 const {get_all_tags} = tagActions;
 const {update_content, update_tags, update_title, save_article,update_summary,update_coverimg} = actions;
 const Option = Select.Option;
 var $ = require('jquery');
 window.$ = $;
+
 
 class AdminNewArticle extends Component {
     constructor(props) {
@@ -137,8 +136,8 @@ class AdminNewArticle extends Component {
                         value={this.props.tags}
                     >
                         {
-                            this.props.tagsBase.map((item) => (
-                                <Option key={item.name}>{item.name}</Option>
+                            this.props.tagsBase.map((item,index) => (
+                                <Option key={index}>{item.name}</Option>
                             ))
                         }
                     </Select>
@@ -175,7 +174,7 @@ class AdminNewArticle extends Component {
                 >
                     <div className={style.modalContainer}>
                         <div id='preview' className={style.testCode}>
-                            {remark().use(reactRenderer).processSync(this.props.content).contents}
+                            <ReactMarkdown source={this.props.content} />
                         </div>
                     </div>
                 </Modal>

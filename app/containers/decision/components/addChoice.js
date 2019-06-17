@@ -72,7 +72,7 @@ export const model = [
 const TodoList = ({data})=>(//创建决定页面Todo组件
     <div>{
         data.map((data,key)=>(
-            <Link to={`/小决定/create/${key}`}><div className='Index_Item_Box'>
+            <Link key={key} to={`/小决定/create/${key}`}><div className='Index_Item_Box'>
                 <div className="Index_Item">
                     <a>{emoji[data.model]}</a><span>{data.title}</span>
                 </div>

@@ -11,12 +11,10 @@ import Admin from "../admin/Admin";
 const {get_article_list,delete_article,edit_article} = actions;
 const {get_article_detail} = FrontActions;
 class AdminManagerArticle extends Component{
-
     constructor(props){
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
-
     render(){
         return(
             <div>
@@ -46,7 +44,6 @@ class AdminManagerArticle extends Component{
             </div>
         )
     }
-
     componentDidMount() {
         if(this.props.articleList.length === 0){
             this.props.get_article_list()

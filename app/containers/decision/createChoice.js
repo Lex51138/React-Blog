@@ -13,7 +13,7 @@ const TodoList = ({ data, handleChange, del }) => (//创建决定页面Todo组�
     <div className='wdnmd'>
         {
             data.map((result, key) => (
-                <div id={key} className='Index_Item_Box add'>
+                <div key={key} id={key} className='Index_Item_Box add'>
                     <a className='delete' onClick={del.bind(this)}>&#xe600;</a>
                     <input type="text" placeholder='選項' onChange={handleChange.bind(this)} value={result} className="Opition_Input" />
                     <div className='Weights'>權重</div>
