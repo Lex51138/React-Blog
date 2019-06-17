@@ -27,7 +27,7 @@ export default class AdminMenu extends Component {
                 >
                     {
                         menus.map((item, index) =>
-                            <Menu.Item key={index} >
+                            <Menu.Item key={item.url} >
                                 <Icon type={item.iconType}/>
                                 <span>{item.name}</span>
                             </Menu.Item>)
